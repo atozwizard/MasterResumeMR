@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>이영기 | Master Resume</title>
+    <title>이영기 포트폴리오</title>
     <meta
       name="description"
       content="현장의 결핍을 구조화해 설명 가능한 시스템으로 바꾸는 개발자 이영기의 공개 포트폴리오"
@@ -13,18 +13,16 @@
   <body>
     <div class="shell">
       <nav class="nav">
-        <strong>Lee Youngki</strong>
+        <strong>이영기 포트폴리오</strong>
         <div class="nav-links">
-          <a href="#story">Story</a>
-          <a href="#roles">Roles</a>
-          <a href="#projects">Projects</a>
-          <a href="#timeline">Timeline</a>
-          <a href="https://github.com/atozwizard/MasterResumeMR/blob/masterresume/resume.md">Resume</a>
-          <a href="https://github.com/atozwizard/MasterResumeMR/blob/masterresume/portfolio.md">Portfolio</a>
+          <a href="#summary">요약</a>
+          <a href="#story">스토리</a>
+          <a href="#projects">프로젝트</a>
+          <a href="#experience">경험</a>
         </div>
       </nav>
 
-      <section class="hero">
+      <section class="hero" id="summary">
         <article class="panel">
           <div class="eyebrow">Master Resume</div>
           <h1>현장의 결핍을 구조화해 설명 가능한 시스템으로 바꾸는 개발자</h1>
@@ -33,32 +31,26 @@
             문제를 기술 구조로 번역하고 다시 서비스로 연결합니다.
           </p>
           <div class="actions">
-            <a class="button primary" href="https://github.com/atozwizard/MasterResumeMR/blob/masterresume/developer-story.md">개발자 스토리 읽기</a>
-            <a class="button secondary" href="https://github.com/atozwizard/MasterResumeMR/blob/masterresume/projects/README.md">대표 프로젝트 보기</a>
-            <a class="button secondary" href="https://github.com/atozwizard/MasterResumeMR/blob/masterresume/resume.md">이력서 보기</a>
-          </div>
-          <div class="stack">
-            <span class="chip">AI Engineer</span>
-            <span class="chip">AI Researcher - NLP, LLM</span>
-            <span class="chip">Backend Engineer</span>
-            <span class="chip">Product Engineer</span>
+            <a class="button primary" href="https://github.com/atozwizard/MasterResumeMR/blob/masterresume/README.md">README 보기</a>
+            <a class="button secondary" href="https://github.com/atozwizard/MasterResumeMR/blob/masterresume/developer-story.md">개발자 스토리</a>
+            <a class="button secondary" href="https://github.com/atozwizard/MasterResumeMR/blob/masterresume/projects/README.md">프로젝트 모음</a>
           </div>
         </article>
 
         <aside class="panel">
-          <div class="eyebrow">Quick Facts</div>
+          <div class="eyebrow">한눈에 보기</div>
           <div class="meta-list">
             <div class="meta-row">
+              <div class="meta-label">포지션</div>
+              <div class="meta-value">AI Engineer · AI Researcher - NLP, LLM · Backend Engineer · Product Engineer</div>
+            </div>
+            <div class="meta-row">
               <div class="meta-label">핵심 강점</div>
-              <div class="meta-value">문제를 구조화하고, 근거를 남기며, 서비스로 다시 설명하는 능력</div>
+              <div class="meta-value">문제 구조화, 근거 기반 설명, 운영형 AI 서비스 설계, README 기반 문서화</div>
             </div>
             <div class="meta-row">
-              <div class="meta-label">주요 기술</div>
+              <div class="meta-label">대표 기술</div>
               <div class="meta-value">Python, FastAPI, LangChain, LangGraph, RAG, AST 분석</div>
-            </div>
-            <div class="meta-row">
-              <div class="meta-label">대표 축</div>
-              <div class="meta-value">현장 운영 경험 + 설명 가능한 AI 시스템 설계</div>
             </div>
             <div class="meta-row">
               <div class="meta-label">링크</div>
@@ -75,55 +67,26 @@
         <div class="section-head">
           <div>
             <div class="eyebrow">Story</div>
-            <h2>모든 경험을 묶는 중심 서사</h2>
+            <h2>개발자 스토리</h2>
           </div>
         </div>
         <article class="panel">
-          <p class="quote">
-            "감각에 의존하던 현장 문제를, 반복 가능하고 설명 가능한 시스템으로 바꾸는 일."
-          </p>
+          <p class="quote">"감각에 의존하던 현장 문제를, 반복 가능하고 설명 가능한 시스템으로 바꾸는 일."</p>
           <div class="story-list">
             <p>
-              교육 영업 현장에서는 성과가 나더라도 왜 그런지 설명되지 않는 문제가 있었습니다. 브랜드 운영과 창업
-              현장에서는 상권 제약, 조리 병목, 고객 경험의 흔들림, 운영 비효율을 직접 겪었습니다.
+              교육 영업 현장에서는 성과가 나더라도 왜 그런지 설명되지 않는 문제가 있었습니다. 브랜드 운영과 창업 현장에서는
+              상권 제약, 조리 병목, 고객 경험의 흔들림, 운영 비효율을 직접 겪었습니다.
             </p>
             <p>
-              여러 번의 창업과 실패를 거치며 감각만으로는 같은 문제를 반복하게 되고, 문제를 구조로 바꾸고 원인을
-              설명할 수 있어야 다음 개선이 가능하다는 점을 배웠습니다.
+              여러 번의 창업과 실패를 거치며 감각만으로는 같은 문제를 반복하게 되고, 문제를 구조로 바꾸고 원인을 설명할 수
+              있어야 다음 개선이 가능하다는 점을 배웠습니다.
             </p>
             <p>
-              AI 전환 이후에는 이 경험을 `company_analyzer`, `job-analyzer`, `trade-onboarding-agent`,
-              `idol_agent_LUMI`, `poketdogam` 같은 프로젝트로 이어가며, 설명 가능한 분석과 운영형 AI 서비스
-              구조를 구현하고 있습니다.
+              AI 전환 이후에는 이 경험을 기반으로 `company_analyzer`, `job-analyzer`, `trade-onboarding-agent`,
+              `idol_agent_LUMI`, `poketdogam` 같은 프로젝트를 구현하며 설명 가능한 분석과 운영형 AI 서비스 구조를 만들고 있습니다.
             </p>
           </div>
         </article>
-      </section>
-
-      <section class="section" id="roles">
-        <div class="section-head">
-          <div>
-            <div class="eyebrow">Roles</div>
-            <h2>지원 직무별 해석</h2>
-          </div>
-          <p>같은 경험을 다른 직무 언어로 번역할 수 있습니다.</p>
-        </div>
-        <div class="grid-2">
-          <article class="card">
-            <h3>AI Engineer / AI Researcher</h3>
-            <p>
-              설명 가능한 분석 구조, RAG, AST 기반 저장소 해석, 운영형 AI 서비스 구조, 평가 및 연구 브랜치 경험을
-              중심으로 보여줍니다.
-            </p>
-          </article>
-          <article class="card">
-            <h3>Backend / Product Engineer</h3>
-            <p>
-              상태 흐름 안정성, 서비스 구조 설계, 사용자 경험 전달, 운영 병목 해석, README 기반 문서화 역량을
-              중심으로 보여줍니다.
-            </p>
-          </article>
-        </div>
       </section>
 
       <section class="section" id="projects">
@@ -132,66 +95,71 @@
             <div class="eyebrow">Projects</div>
             <h2>대표 프로젝트</h2>
           </div>
-          <p>구현, 연구, 기획을 구분해 읽을 수 있도록 정리했습니다.</p>
         </div>
         <div class="project-grid">
           <article class="card">
-            <h3><a href="https://github.com/atozwizard/MasterResumeMR/blob/masterresume/projects/company_analyzer.md">company_analyzer</a></h3>
-            <p>기업 요구와 사용자 경험을 같은 언어로 해석하는 멀티에이전트 분석 구조</p>
+            <h3><a href="https://github.com/atozwizard/MasterResumeMR/blob/masterresume/projects/company_analyzer.md">기업 분석 프로젝트 `company_analyzer`</a></h3>
+            <p>기업 요구와 사용자 경험을 같은 분석 언어로 연결하는 멀티에이전트 구조</p>
           </article>
           <article class="card">
-            <h3><a href="https://github.com/atozwizard/MasterResumeMR/blob/masterresume/projects/company_analyzer_v2.md">company_analyzer_v2</a></h3>
-            <p>HybridRAG와 포트폴리오 생성 흐름까지 확장한 연구 성격의 분석 고도화 버전</p>
+            <h3><a href="https://github.com/atozwizard/MasterResumeMR/blob/masterresume/projects/company_analyzer_v2.md">기업 분석 고도화 프로젝트 `company_analyzer_v2`</a></h3>
+            <p>HybridRAG와 포트폴리오 생성 흐름까지 확장한 분석 고도화 버전</p>
           </article>
           <article class="card">
-            <h3><a href="https://github.com/atozwizard/MasterResumeMR/blob/masterresume/projects/job-analyzer.md">job-analyzer</a></h3>
+            <h3><a href="https://github.com/atozwizard/MasterResumeMR/blob/masterresume/projects/job-analyzer.md">저장소 분석 프로젝트 `job-analyzer`</a></h3>
             <p>AST와 의미 분석을 결합해 저장소를 JD와 연결하는 구조 분석 프로젝트</p>
           </article>
           <article class="card">
-            <h3><a href="https://github.com/atozwizard/MasterResumeMR/blob/masterresume/projects/trade-onboarding-agent.md">trade-onboarding-agent</a></h3>
-            <p>업무 온보딩 과정의 상태 흐름과 비동기 안정성을 다룬 에이전트 프로젝트</p>
+            <h3><a href="https://github.com/atozwizard/MasterResumeMR/blob/masterresume/projects/trade-onboarding-agent.md">무역 온보딩 에이전트 `trade-onboarding-agent`</a></h3>
+            <p>상태 흐름 안정성과 비동기 처리 정합성을 다룬 온보딩 에이전트</p>
           </article>
           <article class="card">
-            <h3><a href="https://github.com/atozwizard/MasterResumeMR/blob/masterresume/projects/idol_agent_LUMI.md">idol_agent_LUMI</a></h3>
-            <p>fallback, checkpoint, tracing까지 포함한 운영형 AI 서비스 구조</p>
+            <h3><a href="https://github.com/atozwizard/MasterResumeMR/blob/masterresume/projects/idol_agent_LUMI.md">운영형 아이돌 에이전트 `idol_agent_LUMI`</a></h3>
+            <p>fallback, checkpoint, tracing을 포함한 운영형 AI 서비스 구조</p>
           </article>
           <article class="card">
-            <h3><a href="https://github.com/atozwizard/MasterResumeMR/blob/masterresume/projects/poketdogam.md">poketdogam</a></h3>
-            <p>사용자 경험과 인터랙션 구조를 전면에 둔 제품형 프로젝트</p>
+            <h3><a href="https://github.com/atozwizard/MasterResumeMR/blob/masterresume/projects/poketdogam.md">제품 경험 프로젝트 `poketdogam`</a></h3>
+            <p>사용자 경험과 서비스 전달 구조를 전면에 둔 제품형 프로젝트</p>
           </article>
         </div>
       </section>
 
-      <section class="section" id="timeline">
+      <section class="section" id="experience">
         <div class="section-head">
           <div>
-            <div class="eyebrow">Timeline</div>
-            <h2>경험 흐름</h2>
+            <div class="eyebrow">Experience</div>
+            <h2>경험 요약</h2>
           </div>
         </div>
-        <article class="panel timeline">
-          <div class="timeline-item">
-            <div class="timeline-year">2011-2015</div>
-            <div>
-              <strong>한솔교육</strong>
-              <p>영업 및 교육 관리 경험을 통해 운영 구조와 성과 확장 문제를 다뤘습니다.</p>
-            </div>
-          </div>
-          <div class="timeline-item">
-            <div class="timeline-year">2014-2025</div>
-            <div>
-              <strong>브랜드 운영 및 창업</strong>
-              <p>커피소녀오즈, 우동오즈, 쿤타치 자가제면, 리틀방콕을 거치며 실제 현장 병목을 다뤘습니다.</p>
-            </div>
-          </div>
-          <div class="timeline-item">
-            <div class="timeline-year">2025-현재</div>
-            <div>
-              <strong>AI 전환과 프로젝트 집중</strong>
-              <p>SESAC x UPSTAGE 이후 AI Agent, RAG, Backend 프로젝트를 구현하고 문서화하고 있습니다.</p>
-            </div>
-          </div>
-        </article>
+        <div class="grid-2">
+          <article class="card">
+            <h3>교육과 운영</h3>
+            <p>
+              한솔교육에서 영업 및 교육 관리 경험을 통해 운영 구조와 성과 확장 문제를 다뤘습니다. 관리 수업 수를
+              `50 -> 150`으로 확장하고 `300%` 성장 경험을 만들었습니다.
+            </p>
+          </article>
+          <article class="card">
+            <h3>브랜드 운영과 창업</h3>
+            <p>
+              `커피소녀오즈`, `우동오즈`, `쿤타치 자가제면`, `리틀방콕 중계그린점`을 거치며 상권, 동선, 조리 병목,
+              고객 경험 문제를 직접 다뤘습니다.
+            </p>
+          </article>
+          <article class="card">
+            <h3>AI 전환</h3>
+            <p>
+              SESAC x UPSTAGE AI Agent 과정 이후 공개 저장소 기반 프로젝트를 지속적으로 구현하고 문서화하고 있습니다.
+            </p>
+          </article>
+          <article class="card">
+            <h3>학습 방식</h3>
+            <p>
+              발표, 스터디, 코딩테스트, POMMIT 협업을 통해 학습을 산출물로 전환하고, 프로젝트 README와 보고서로 근거를
+              남기고 있습니다.
+            </p>
+          </article>
+        </div>
       </section>
 
       <footer class="footer">
