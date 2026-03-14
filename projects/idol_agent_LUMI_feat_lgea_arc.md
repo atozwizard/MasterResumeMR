@@ -1,4 +1,4 @@
-# idol_agent_LUMI feat/lgea/arc
+# LGEA 연구 브랜치 `idol_agent_LUMI feat/lgea/arc`
 
 `feat/lgea/arc`는 서비스 브랜치와 분리된 연구 브랜치입니다. guardrail erosion 분석과 평가 파이프라인 설계를 중심으로, 반복 실행 가능한 연구 구조를 다룹니다.
 

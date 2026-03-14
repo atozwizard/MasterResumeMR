@@ -1,4 +1,4 @@
-# job-analyzer
+# 저장소 분석 프로젝트 `job-analyzer`
 
 `job-analyzer`는 채용 공고와 GitHub 저장소를 함께 분석해, 코드 경험을 기술 스택 나열이 아니라 역할과 비즈니스 가치 언어로 번역하는 프로젝트입니다.
 

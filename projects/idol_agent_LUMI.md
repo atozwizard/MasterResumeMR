@@ -1,4 +1,4 @@
-# idol_agent_LUMI
+# 운영형 아이돌 에이전트 `idol_agent_LUMI`
 
 운영형 대화형 AI 서비스를 전제로 한 프로젝트입니다. 생성 품질만이 아니라, fallback, checkpoint, tracing, cost tracking까지 함께 고려한 구조가 핵심입니다.
 

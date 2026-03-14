@@ -1,4 +1,4 @@
-# manufacturing-ai-coach
+# 제조 AI 코치 기획 `manufacturing-ai-coach`
 
 센서 데이터, 유지보수 이력, SOP 문서를 함께 참조해 진단과 조치를 연결하려는 프로젝트입니다. 다원적 운영 데이터를 한 의사결정 흐름으로 묶는 문제 정의가 중심입니다.
 
