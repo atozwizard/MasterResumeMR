@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>trade-onboarding-agent | 이영기</title>
     <link rel="stylesheet" href="../styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+    <script>
+      mermaid.initialize({ startOnLoad: true, theme: 'base', themeVariables: { primaryColor: '#f3f2ef', primaryTextColor: '#1f1f1f', primaryBorderColor: '#d9d5cf', lineColor: '#8a8175', secondaryColor: '#ffffff', tertiaryColor: '#fbfbfa', fontFamily: 'Pretendard, Noto Sans KR, sans-serif' } });
+    </script>
   </head>
   <body>
     <main class="doc">
@@ -38,6 +42,17 @@
           <li>RAG 검색으로 관련 무역 문서를 찾고, 이를 바탕으로 리스크를 평가합니다.</li>
           <li>최종적으로 리포트 형태의 결과를 반환합니다.</li>
         </ol>
+        <div class="mermaid">
+flowchart LR
+    A[무역 도메인 데이터셋] --> B[ingest.py]
+    B --> C[ChromaDB]
+    D[사용자 입력] --> E[riskmanaging agent]
+    E --> F[대화형 정보 수집]
+    F --> G[RAG 검색]
+    C --> G
+    G --> H[리스크 평가]
+    H --> I[보고서 / 응답 반환]
+        </div>
       </section>
       <section class="doc-section">
         <h2>근거와 산출물</h2>

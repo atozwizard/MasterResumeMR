@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>LUMI | 이영기</title>
     <link rel="stylesheet" href="../styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+    <script>
+      mermaid.initialize({ startOnLoad: true, theme: 'base', themeVariables: { primaryColor: '#f3f2ef', primaryTextColor: '#1f1f1f', primaryBorderColor: '#d9d5cf', lineColor: '#8a8175', secondaryColor: '#ffffff', tertiaryColor: '#fbfbfa', fontFamily: 'Pretendard, Noto Sans KR, sans-serif' } });
+    </script>
   </head>
   <body>
     <main class="doc">
@@ -31,10 +35,31 @@
           <li><code>app/core/llm.py</code>, <code>checkpointer.py</code>, <code>token_counter.py</code>, <code>cost_tracker.py</code>, <code>tracing.py</code>로 운영 요소 분리</li>
           <li><code>app/repositories/rag.py</code>, <code>schedule.py</code>, <code>fan_letter.py</code>, <code>conversation.py</code>로 저장소 계층 분리</li>
         </ul>
+        <div class="mermaid">
+flowchart LR
+    A[FastAPI / UI] --> B[LangGraph state]
+    B --> C[nodes / edges / graph]
+    C --> D[RAG repository]
+    C --> E[schedule repository]
+    C --> F[fan letter repository]
+    C --> G[conversation repository]
+    C --> H[LLM / fallback]
+    H --> I[token / cost tracking]
+    H --> J[tracing]
+        </div>
       </section>
       <section class="doc-section">
         <h2>LGEA와의 관계</h2>
         <p><code>LUMI</code>는 서비스를 만드는 프로젝트이고, <code>LGEA</code>는 그 서비스가 어떤 질문에서 어떻게 반응하는지를 평가하는 프로젝트입니다. 이 둘을 분리해야 서비스 코드와 평가 코드가 서로 오염되지 않고, 운영과 연구를 각각 설명할 수 있습니다.</p>
+        <div class="mermaid">
+flowchart LR
+    A[LUMI] --> B[상태 유지 / fallback / tracing]
+    A --> C[RAG / schedule / fan letter]
+    D[LGEA] --> E[질문 실행]
+    D --> F[채점 / 비교 / 분석]
+    D --> G[보고서 생성]
+    A -. 평가 대상 .-> D
+        </div>
       </section>
       <section class="doc-section">
         <h2>결과와 의미</h2>

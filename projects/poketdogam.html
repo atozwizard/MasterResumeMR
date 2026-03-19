@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>poketdogam | 이영기</title>
     <link rel="stylesheet" href="../styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+    <script>
+      mermaid.initialize({ startOnLoad: true, theme: 'base', themeVariables: { primaryColor: '#f3f2ef', primaryTextColor: '#1f1f1f', primaryBorderColor: '#d9d5cf', lineColor: '#8a8175', secondaryColor: '#ffffff', tertiaryColor: '#fbfbfa', fontFamily: 'Pretendard, Noto Sans KR, sans-serif' } });
+    </script>
   </head>
   <body>
     <main class="doc">
@@ -30,10 +34,30 @@
           <li>입력 수집, OCR, 후보 확인, 문맥 검색, 응답 생성, trace 저장 구조</li>
           <li>설계 문서 기준 기술 조합: <code>LiteLLM</code>, <code>Upstage OCR</code>, <code>Supabase pgvector</code>, <code>Graph DB</code>, <code>Langfuse</code></li>
         </ul>
+        <div class="mermaid">
+flowchart LR
+    A[chat route] --> D[질문 처리]
+    B[scan route] --> E[이미지 스캔 처리]
+    C[pokedex route] --> F[도감 상세 조회]
+    D --> G[공통 응답 레이어]
+    E --> G
+    F --> G
+        </div>
       </section>
       <section class="doc-section">
         <h2>실패를 어떻게 다뤘는가</h2>
         <p>이미지를 받으면 OCR을 실행하고, 결과가 확실하면 문맥 검색으로 넘깁니다. 애매하면 후보 확인 단계로 보내고, 그래도 불확실하면 fallback 경로로 넘긴 뒤 최종 응답과 trace를 남깁니다. 이 프로젝트의 강점은 OCR을 붙였다는 사실보다 실패를 전제로 사용자 흐름을 설계했다는 점입니다.</p>
+        <div class="mermaid">
+flowchart LR
+    A[이미지 입력] --> B[OCR 실행]
+    B --> C{결과 확실한가?}
+    C -->|예| D[문맥 검색]
+    C -->|아니오| E[후보 확인]
+    E --> F[Fallback 경로]
+    D --> G[응답 생성]
+    F --> G
+    G --> H[trace 저장]
+        </div>
       </section>
       <section class="doc-section">
         <h2>구현된 것과 남은 것</h2>
