@@ -20,14 +20,12 @@
         <ul class="link-list">
           <li><a href="./resume.html">이력서</a></li>
           <li><a href="./cover-letter.html">자기소개서</a></li>
-          <li><a href="./portfolio.html">포트폴리오 본문</a></li>
-          <li><a href="./projects/index.html">프로젝트 목록</a></li>
         </ul>
       </section>
       <section class="doc-section">
         <h2>핵심 역량</h2>
         <ul class="plain-list">
-          <li>상태, 분기, fallback, tracing을 포함한 운영 가능한 AI 구조 설계</li>
+          <li>상태, 분기, fallback, tracing을 포함한, 운영 가능한 AI 구조 설계</li>
           <li>사용자 문제와 운영 병목을 제품 흐름으로 번역</li>
           <li>실험, 채점, 분석을 분리한 평가 구조 설계</li>
           <li>문서와 리포트까지 포함한 산출물 정리</li>
@@ -35,13 +33,13 @@
       </section>
       <section class="doc-section">
         <h2>대표 프로젝트</h2>
-        <ol class="stack-list">
-          <li><a href="./projects/pommit.html"><strong>1. POMMIT</strong></a><p>service_agent 흐름을 중심으로 HTML 정리, 텍스트 정제, 단어 빈도 추출, collector 전달 구조를 정리하고, 이후 NLP 전처리 강화와 HybridRAG 방향을 검토했습니다.</p></li>
-          <li><a href="./projects/lgea.html"><strong>2. LGEA</strong></a><p>LUMI 서비스 응답을 실제로 테스트하는 평가 워크스페이스로, persona에 따른 모델 가드레일 붕괴를 비교하는 실험 흐름을 다뤘습니다.</p></li>
-          <li><a href="./projects/trade-onboarding-agent.html"><strong>3. trade-onboarding-agent</strong></a><p>무역 실무 온보딩 미니프로젝트에서 RAG와 riskmanaging agent 흐름을 중심으로 작업하고, 도메인 검색 구조와 백엔드 흐름을 정리했습니다.</p></li>
-          <li><a href="./projects/poketdogam.html"><strong>4. poketdogam</strong></a><p>chat, scan, pokedex 흐름을 나눠 멀티모달 사용자 경험을 설계하고, OCR 이후 fallback과 trace 저장 구조를 함께 다뤘습니다.</p></li>
-          <li><a href="./projects/lumi.html"><strong>5. LUMI</strong></a><p>구조, 아키텍처, 배포, LLMOps까지 학습하기 위해 진행한 운영형 AI 서비스 본체이며, LGEA는 이 서비스를 검증하는 별도 평가 레이어입니다.</p></li>
-        </ol>
+        <ul class="stack-list">
+          <li><a href="./projects/pommit.html"><strong>1. POMMIT</strong></a><p>기업 분석 프로젝트 안에서 <code>service_agent</code> 흐름을 중심으로 HTML 정리, 텍스트 정제, 단어 빈도 추출, collector 전달 구조를 정리했습니다. 이후에는 NLP 전처리 강화와 HybridRAG 방향을 연구 메모와 설계 문서 수준에서 검토했습니다.</p></li>
+          <li><a href="./projects/lgea.html"><strong>2. LGEA</strong></a><p><code>LUMI</code> 서비스 응답을 실제로 테스트하는 평가 워크스페이스입니다. <code>runner -&gt; judge -&gt; analysis -&gt; reports</code> 구조로 질문 실행, 채점, 비교 분석, 보고서 생성을 분리했고, persona에 따른 모델 가드레일 붕괴를 비교하는 실험 흐름을 다뤘습니다.</p></li>
+          <li><a href="./projects/trade-onboarding-agent.html"><strong>3. trade-onboarding-agent</strong></a><p>무역 실무 온보딩 미니프로젝트에서 <code>RAG</code>와 <code>riskmanaging agent</code> 흐름을 중심으로 작업했습니다. 무역 도메인 데이터 ingest, ChromaDB 기반 검색 구조, riskmanaging agent 문서와 백엔드 흐름을 정리하고, 리스크 질문을 RAG 근거와 함께 응답하는 구조를 다뤘습니다.</p></li>
+          <li><a href="./projects/poketdogam.html"><strong>4. poketdogam</strong></a><p><code>chat</code>, <code>scan</code>, <code>pokedex</code> 흐름을 나눠 멀티모달 사용자 경험을 설계했습니다. 스캔 흐름에는 <code>입력 수집 -&gt; OCR/후보 확인 -&gt; 문맥 검색 -&gt; 응답 생성 -&gt; trace 저장</code> 단계를 두고 fallback을 함께 설계했습니다.</p></li>
+          <li><a href="./projects/lumi.html"><strong>5. LUMI</strong></a><p>청년취업사관학교 교육과정 안에서 구조, 아키텍처, 배포, LLMOps까지 학습하기 위해 진행한 운영형 AI 서비스 본체입니다. 상태, 저장, token/cost tracking, tracing, RAG, fallback 구조를 갖췄고, <code>LGEA</code>는 이 서비스를 검증하는 별도 평가 레이어입니다.</p></li>
+        </ul>
       </section>
       <section class="doc-section">
         <h2>이전 경험</h2>
@@ -51,6 +49,14 @@
           <li>쿤타치 자가제면: 자가제면 공정과 매장 동선을 함께 보며 운영 효율과 제품 정체성을 조정</li>
           <li>리틀방콕 중계그린점: 25평 규모 매장에서 HR, 근태, 홀 교육, CS 운영, 주방 교육, 프랜차이즈 구조 경험</li>
           <li>한솔교육: 3개 지역 150개 수업 운영, 프로모션 매출 달성, 예비팀장 승진 경험</li>
+        </ul>
+      </section>
+      <section class="doc-section">
+        <h2>링크</h2>
+        <ul class="link-list">
+          <li><a href="https://github.com/atozwizard">GitHub</a></li>
+          <li><a href="https://gist.github.com/atozwizard">Gist</a></li>
+          <li><a href="mailto:at.oz.wizard@gmail.com">Email</a></li>
         </ul>
       </section>
     </main>
