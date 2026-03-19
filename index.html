@@ -15,117 +15,96 @@
       <nav class="nav">
         <strong>이영기 | AI Portfolio</strong>
         <div class="nav-links">
-          <a href="#summary">Summary</a>
+          <a href="#home">Home</a>
           <a href="#projects">Projects</a>
-          <a href="#experience">Experience</a>
           <a href="#links">Links</a>
         </div>
       </nav>
 
-      <section class="hero" id="summary">
-        <article class="panel hero-main">
+      <section class="hero" id="home">
+        <div class="hero-copy">
           <div class="eyebrow">AI Agent Engineer · AI Product Engineer · AI Researcher</div>
           <h1>현장의 문제를 흐름과 구조로 풀어, 운영 가능한 AI로 만드는 엔지니어</h1>
           <p class="lead">
             창업과 외식업 운영, 프랜차이즈 현장에서 고객 경험, 병목, 서비스 품질, 인력 운영 문제를 직접 다뤘습니다.
             지금은 그 경험에서 익힌 문제 구조화 방식과 운영 감각을 AI Agent, AI Product, AI Research 프로젝트에 적용하고 있습니다.
           </p>
-          <div class="actions">
-            <a class="button primary" href="./portfolio.md">Portfolio</a>
-            <a class="button secondary" href="./resume.md">Resume</a>
-            <a class="button secondary" href="./cover-letter.md">Cover Letter</a>
-            <a class="button secondary" href="./projects/README.md">Projects</a>
+          <div class="micro-points">
+            <span>상태, 분기, fallback, tracing</span>
+            <span>RAG와 평가 파이프라인</span>
+            <span>문서와 리포트까지 남기는 산출물</span>
           </div>
-        </article>
+        </div>
 
-        <aside class="panel hero-side">
-          <div class="eyebrow">Core Focus</div>
-          <div class="meta-list">
-            <div class="meta-row">
-              <div class="meta-label">문제 방식</div>
-              <div class="meta-value">입력, 상태, 판단, 출력, 검증 구조로 문제를 다시 나눕니다.</div>
-            </div>
-            <div class="meta-row">
-              <div class="meta-label">기술 축</div>
-              <div class="meta-value">FastAPI, LangGraph, RAG, fallback, tracing, 평가 파이프라인</div>
-            </div>
-            <div class="meta-row">
-              <div class="meta-label">대표 프로젝트</div>
-              <div class="meta-value">POMMIT · LGEA · trade-onboarding-agent · poketdogam · LUMI</div>
-            </div>
-          </div>
-        </aside>
+        <div class="hero-links">
+          <a class="jump-card" href="./resume.md">
+            <strong>Resume</strong>
+            <span>제출형 이력서</span>
+          </a>
+          <a class="jump-card" href="./cover-letter.md">
+            <strong>Cover Letter</strong>
+            <span>직무 고려 마스터 자기소개서</span>
+          </a>
+          <a class="jump-card" href="./portfolio.md">
+            <strong>Portfolio</strong>
+            <span>상세 서사와 대표 프로젝트 설명</span>
+          </a>
+          <a class="jump-card" href="./projects/README.md">
+            <strong>Projects</strong>
+            <span>대표 프로젝트 5개 상세 링크</span>
+          </a>
+        </div>
       </section>
 
       <section class="section" id="projects">
-        <div class="section-head">
+        <div class="section-head compact-head">
           <div>
             <div class="eyebrow">Featured Projects</div>
             <h2>대표 프로젝트 5개</h2>
           </div>
+          <p>홈에서는 차이만 보이게 두고, 자세한 설명은 프로젝트 문서로 넘깁니다.</p>
         </div>
-        <div class="project-grid">
-          <article class="card accent-card">
+
+        <div class="project-grid split-home-grid">
+          <article class="project-card project-card-primary">
             <h3><a href="./projects/pommit.md">POMMIT</a></h3>
             <p>service_agent의 HTML 정리, 텍스트 정제, 단어 빈도 추출, collector 전달 구조를 정리하고 HybridRAG 확장 방향을 검토한 프로젝트</p>
           </article>
-          <article class="card accent-card">
+
+          <article class="project-card">
             <h3><a href="./projects/lgea.md">LGEA</a></h3>
             <p>persona에 따른 모델 가드레일 붕괴를 반복 가능하게 비교하는 평가 워크스페이스</p>
           </article>
-          <article class="card accent-card">
+
+          <article class="project-card">
             <h3><a href="./projects/trade-onboarding-agent.md">trade-onboarding-agent</a></h3>
             <p>무역 도메인 RAG와 riskmanaging agent 흐름을 중심으로 정리한 멀티에이전트 미니프로젝트</p>
           </article>
-          <article class="card accent-card">
+
+          <article class="project-card">
             <h3><a href="./projects/poketdogam.md">poketdogam</a></h3>
             <p>OCR, 후보 확인, fallback, trace를 포함한 멀티모달 사용자 흐름 프로젝트</p>
           </article>
-          <article class="card accent-card">
+
+          <article class="project-card">
             <h3><a href="./projects/lumi.md">LUMI</a></h3>
             <p>구조, 아키텍처, 배포, LLMOps까지 학습하기 위해 진행한 교육과정 기반 서비스 본체</p>
           </article>
         </div>
       </section>
 
-      <section class="section" id="experience">
-        <div class="section-head">
-          <div>
-            <div class="eyebrow">Earlier Experience</div>
-            <h2>이전 경력이 지금으로 이어지는 방식</h2>
-          </div>
-        </div>
-        <div class="grid-2">
-          <article class="card">
-            <h3>커피소녀오즈 / 우동오즈 / 쿤타치</h3>
-            <p>고객 경험, 점심 피크타임 병목, 메뉴 설계, B2B 납품, 공정 조정 문제를 직접 다뤘습니다.</p>
-          </article>
-          <article class="card">
-            <h3>리틀방콕 중계그린점</h3>
-            <p>25평 규모 매장에서 HR, 근태, 홀 교육, CS 운영, 프랜차이즈 표준과 현장 실행의 간극을 경험했습니다.</p>
-          </article>
-          <article class="card">
-            <h3>한솔교육</h3>
-            <p>1개 지역 50개 수업에서 3개 지역 150개 수업 운영까지 확장하며 운영 구조와 성과를 연결했습니다.</p>
-          </article>
-          <article class="card">
-            <h3>현재의 방식</h3>
-            <p>이전 경력을 AI 연차처럼 환산하지 않고, 고객이 어디서 멈추는지와 공정이 어디서 막히는지부터 보는 방식으로 지금의 AI 프로젝트를 다룹니다.</p>
-          </article>
-        </div>
-      </section>
-
       <section class="section" id="links">
-        <div class="section-head">
+        <div class="section-head compact-head">
           <div>
-            <div class="eyebrow">Links</div>
+            <div class="eyebrow">Quick Access</div>
             <h2>바로 이동</h2>
           </div>
         </div>
-        <div class="link-grid">
+
+        <div class="link-grid simplified-links">
           <a class="link-card" href="./portfolio.md">
             <strong>Portfolio</strong>
-            <span>상세 서사와 대표 프로젝트 설명</span>
+            <span>상세 서사와 이전 경력, 대표 프로젝트 설명</span>
           </a>
           <a class="link-card" href="./resume.md">
             <strong>Resume</strong>
@@ -133,11 +112,11 @@
           </a>
           <a class="link-card" href="./cover-letter.md">
             <strong>Cover Letter</strong>
-            <span>직무 고려 마스터 자기소개서</span>
+            <span>업무상 강점, 동기 및 포부, 준비 노력</span>
           </a>
           <a class="link-card" href="./projects/README.md">
             <strong>Projects</strong>
-            <span>대표 프로젝트 5개 상세 링크</span>
+            <span>대표 프로젝트 5개 상세 문서 모음</span>
           </a>
         </div>
       </section>
