@@ -5,44 +5,65 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>trade-onboarding-agent | 이영기</title>
     <link rel="stylesheet" href="../styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
-    <script>
-      mermaid.initialize({ startOnLoad: true, theme: 'base', themeVariables: { primaryColor: '#f3f2ef', primaryTextColor: '#1f1f1f', primaryBorderColor: '#d9d5cf', lineColor: '#8a8175', secondaryColor: '#ffffff', tertiaryColor: '#fbfbfa', fontFamily: 'Pretendard, Noto Sans KR, sans-serif' } });
-    </script>
   </head>
   <body>
     <main class="doc">
       <nav class="top-nav"><a href="../index.html">Home</a></nav>
       <header class="doc-header">
         <p class="eyebrow">03. trade-onboarding-agent</p>
-        <h1>RAG와 riskmanaging agent를 중심으로 다룬 무역 온보딩 미니프로젝트</h1>
-        <p class="lede">무역 실무 온보딩을 위해 <code>RAG 기반 지식 검색</code>과 <code>riskmanaging agent</code>를 중심으로 구성한 멀티에이전트 미니프로젝트입니다.</p>
       </header>
-      <section class="doc-section">
-        <h2>핵심 메시지</h2>
-        <p>이 프로젝트에서 제가 중심으로 다룬 것은 오케스트레이터 전체보다, 무역 도메인 RAG와 riskmanaging 흐름이 실제로 작동하도록 만드는 부분이었습니다.</p>
-      </section>
-      <section class="doc-section">
-        <h2>왜 필요했는가</h2>
-        <p>신입사원 온보딩은 문서만 많이 보여준다고 해결되지 않았습니다. 사용자는 용어 이해, 이메일 작성, 리스크 판단처럼 다른 성격의 작업을 연속으로 수행해야 했고, 그 과정에서 앞선 대화 맥락이 계속 이어져야 했습니다.</p>
-      </section>
-      <section class="doc-section">
-        <h2>내 역할</h2>
-        <ul class="plain-list">
-          <li>무역 도메인 데이터 기반 RAG 구조 확인 및 정리</li>
-          <li><code>riskmanaging agent</code> 흐름과 관련 문서, 데이터, 처리 구조 파악</li>
-          <li>프로젝트 저장소 기준으로 백엔드 구조와 API 흐름 정리</li>
-        </ul>
-      </section>
-      <section class="doc-section">
-        <h2>어떻게 작동하는가</h2>
-        <ol class="plain-list">
-          <li>무역 도메인 데이터셋을 정리하고 <code>ingest.py</code>를 통해 ChromaDB에 임베딩 기반 검색 자산을 만듭니다.</li>
-          <li>사용자가 리스크 관련 질문을 보내면 <code>riskmanaging agent</code>가 필요한 정보를 대화형으로 수집합니다.</li>
-          <li>RAG 검색으로 관련 무역 문서를 찾고, 이를 바탕으로 리스크를 평가합니다.</li>
-          <li>최종적으로 리포트 형태의 결과를 반환합니다.</li>
-        </ol>
-        <div class="mermaid">
+      <article id="content" class="markdown-body"></article>
+      <script id="md-source" type="text/plain">
+# Trade Onboarding Agent 포트폴리오
+
+## Slide 1. 프리뷰
+
+### 한 줄 설명
+무역 실무 온보딩을 위해 `RAG 기반 지식 검색`과 `riskmanaging agent`를 중심으로 구성한 멀티에이전트 미니프로젝트
+
+### 핵심 메시지
+이 프로젝트에서 제가 중심으로 다룬 것은 오케스트레이터 전체보다, `무역 도메인 RAG와 riskmanaging 흐름이 실제로 작동하도록 만드는 부분`이었습니다.
+
+### 내 역할 요약
+- 무역 도메인 데이터 기반 RAG 구조 확인 및 정리
+- `riskmanaging agent` 흐름과 관련 문서, 데이터, 처리 구조 파악
+- 프로젝트 저장소 기준으로 백엔드 구조와 API 흐름을 정리
+
+---
+
+## Slide 2. 왜 이 프로젝트가 필요했는가
+
+### 문제
+신입사원 온보딩은 문서만 많이 보여준다고 해결되지 않았습니다. 사용자는 용어 이해, 이메일 작성, 리스크 판단처럼 다른 성격의 작업을 연속으로 수행해야 했고, 그 과정에서 앞선 대화 맥락이 계속 이어져야 했습니다.
+
+### 해결하지 않으면 생기는 결과
+- 질문할 때마다 사용자가 배경을 다시 설명해야 합니다.
+- 답변은 있어도 다음 행동으로 연결되지 않습니다.
+- 교육형 챗봇이 단발성 질의응답 도구에 머물게 됩니다.
+
+```mermaid
+flowchart LR
+    A[신입사원 질문 입력] --> B[앞선 대화 맥락 필요]
+    B --> C{작업 성격이 같은가?}
+    C -->|아니오| D[용어 이해 / 이메일 / 리스크 판단 분기 필요]
+    D --> E[맥락이 끊기면 재설명 발생]
+    E --> F[학습 흐름 단절]
+```
+
+---
+
+## Slide 3. 어떻게 흐름을 만들었는가
+
+### 내가 중심으로 본 처리 순서
+1. 무역 도메인 데이터셋을 정리하고 ingest 가능한 형태로 준비합니다.
+2. `ingest.py`를 통해 ChromaDB에 임베딩 기반 검색 자산을 만듭니다.
+3. 사용자가 리스크 관련 질문을 보내면 `riskmanaging agent`가 필요한 정보를 대화형으로 수집합니다.
+4. RAG 검색으로 관련 무역 문서를 찾고, 이를 바탕으로 리스크를 평가합니다.
+5. 최종적으로 리포트 형태의 결과를 반환합니다.
+
+```mermaid
 flowchart LR
     A[무역 도메인 데이터셋] --> B[ingest.py]
     B --> C[ChromaDB]
@@ -51,22 +72,111 @@ flowchart LR
     F --> G[RAG 검색]
     C --> G
     G --> H[리스크 평가]
-    H --> I[보고서 / 응답 반환]
-        </div>
-      </section>
-      <section class="doc-section">
-        <h2>근거와 산출물</h2>
-        <ul class="plain-list">
-          <li>RAG 자산: <code>dataset/*.json</code>, ingestable 기준 지식 베이스 정리 흔적</li>
-          <li>RiskManaging 관련 문서: <code>docs/riskmanaging_workflow.md</code>, <code>docs/riskmanaging_agent_REPORT.md</code></li>
-          <li>프로젝트 구조 문서: <code>README.md</code>, <code>CLAUDE.md</code></li>
-          <li>백엔드 자산: <code>backend/rag/*</code>, <code>backend/agents/riskmanaging/*</code>, <code>risk_checkpoints.db</code></li>
-        </ul>
-      </section>
-      <section class="doc-section">
-        <h2>결과와 의미</h2>
-        <p>이 프로젝트는 단순 용어 검색이 아니라, 리스크 질문을 대화형으로 수집하고 RAG 근거를 붙여 응답하는 흐름을 다룬 프로젝트입니다. 저는 오케스트레이터 전체를 과장해 설명하기보다, 무역 도메인 RAG와 riskmanaging 흐름이 실제로 어떻게 돌아가는지 중심으로 작업하고 정리했습니다.</p>
-      </section>
+    H --> I[보고서/응답 반환]
+```
+
+---
+
+## Slide 4. 내가 맡은 구현 근거
+
+### 현재 근거로 안전하게 말할 수 있는 부분
+- `backend/rag/ingest.py`, `retriever.py`, ChromaDB 기반 검색 구조
+  - 무역 도메인 데이터를 검색 가능한 형태로 준비하는 축
+- `backend/agents/riskmanaging/*`
+  - 리스크 분석과 대화형 정보 수집, 보고서 흐름
+- `docs/riskmanaging_workflow.md`, `docs/riskmanaging_agent_REPORT.md`
+  - 리스크 분석 흐름과 문제점 정리 문서
+- `CLAUDE.md`, `README.md`
+  - 프로젝트 전체 구조, 에이전트 역할, RAG 자산 규모 정리
+
+```mermaid
+sequenceDiagram
+    participant U as User
+    participant API as FastAPI
+    participant R as RiskManagingAgent
+    participant R as RAG
+    U->>API: risk 관련 질문
+    API->>R: risk flow 실행
+    R->>R: 필요한 정보 수집
+    R->>RAG: 관련 문서 검색
+    RAG-->>R: 근거 문서 반환
+    R->>API: 리스크 평가 결과
+    API-->>U: 보고서/응답
+```
+
+---
+
+## Slide 5. 무엇을 남겼는가
+
+### 산출물과 근거
+- RAG 자산
+  - `dataset/*.json`
+  - `17 files / 813 raw / 782 ingestable` 기준 지식 베이스 정리 흔적
+- RiskManaging 관련 문서
+  - `docs/riskmanaging_workflow.md`
+  - `docs/riskmanaging_agent_REPORT.md`
+- 프로젝트 구조 문서
+  - `README.md`
+  - `CLAUDE.md`
+- 백엔드 자산
+  - `backend/rag/*`
+  - `backend/agents/riskmanaging/*`
+  - `risk_checkpoints.db`
+
+### 이 장에서 보여주는 점
+- 이 프로젝트는 아이디어 메모가 아니라, 무역 도메인 데이터, RAG 구조, riskmanaging 흐름, 문서 자산이 함께 남아 있는 미니프로젝트입니다.
+
+---
+
+## Slide 6. 결과와 이 프로젝트가 보여주는 것
+
+### 결과
+- 단순 용어 검색이 아니라, 리스크 질문을 대화형으로 수집하고 RAG 근거를 붙여 응답하는 흐름을 다룬 프로젝트가 됐습니다.
+- 무역 도메인 데이터셋을 검색 가능한 구조로 다루고, riskmanaging agent를 중심으로 백엔드 흐름을 읽고 정리한 근거가 남았습니다.
+- 미니프로젝트지만 도메인 데이터, RAG, 에이전트 문서가 함께 남아 있어 이후 확장과 면접 설명에 활용할 수 있습니다.
+
+### 이 프로젝트가 보여주는 역량
+- AI Agent Engineer 관점
+  - 도메인 RAG와 agent flow를 실제 백엔드 구조로 읽고 정리하는 능력
+- AI Product Engineer 관점
+  - 무역 실무 문제를 리스크 분석과 지식 검색 흐름으로 나누는 시선
+- 공통
+  - 작아도 실제로 남은 근거 문서와 데이터 구조를 바탕으로 설명하는 방식
+
+### 한 줄 정리
+저는 이 프로젝트에서 오케스트레이터 전체를 설명하기보다, `무역 도메인 RAG와 riskmanaging 흐름이 실제로 어떻게 돌아가는지`를 중심으로 작업하고 정리했습니다.
+
+      </script>
+      <script>
+        mermaid.initialize({
+          startOnLoad: false,
+          theme: 'base',
+          themeVariables: {
+            primaryColor: '#f3f2ef',
+            primaryTextColor: '#1f1f1f',
+            primaryBorderColor: '#d9d5cf',
+            lineColor: '#8a8175',
+            secondaryColor: '#ffffff',
+            tertiaryColor: '#fbfbfa',
+            fontFamily: 'Pretendard, Noto Sans KR, sans-serif'
+          }
+        });
+
+        const source = document.getElementById('md-source').textContent.trim();
+        const container = document.getElementById('content');
+        container.innerHTML = marked.parse(source, { gfm: true, breaks: false });
+
+        const mermaidBlocks = Array.from(container.querySelectorAll('pre code.language-mermaid'));
+        for (const block of mermaidBlocks) {
+          const pre = block.parentElement;
+          const host = document.createElement('div');
+          host.className = 'mermaid';
+          host.textContent = block.textContent;
+          pre.replaceWith(host);
+        }
+
+        mermaid.run({ querySelector: '.mermaid' });
+      </script>
     </main>
   </body>
 </html>

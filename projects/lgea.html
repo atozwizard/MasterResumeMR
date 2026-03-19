@@ -5,43 +5,85 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>LGEA | 이영기</title>
     <link rel="stylesheet" href="../styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
-    <script>
-      mermaid.initialize({ startOnLoad: true, theme: 'base', themeVariables: { primaryColor: '#f3f2ef', primaryTextColor: '#1f1f1f', primaryBorderColor: '#d9d5cf', lineColor: '#8a8175', secondaryColor: '#ffffff', tertiaryColor: '#fbfbfa', fontFamily: 'Pretendard, Noto Sans KR, sans-serif' } });
-    </script>
   </head>
   <body>
     <main class="doc">
       <nav class="top-nav"><a href="../index.html">Home</a></nav>
       <header class="doc-header">
         <p class="eyebrow">02. LGEA</p>
-        <h1>persona 기반 모델 가드레일 붕괴 테스트</h1>
-        <p class="lede">실행 중인 <code>LUMI</code> FastAPI와 내부 service surface를 실제로 두드려, 질문 실행 → 채점 → 비교 분석 → 보고서 생성까지 분리한 모델 평가 워크스페이스입니다.</p>
       </header>
-      <section class="doc-section">
-        <h2>핵심 메시지</h2>
-        <p><code>LGEA</code>는 챗봇 기능을 하나 더 붙인 프로젝트가 아니라, persona에 따라 모델의 가드레일이 어느 표면에서 무너지는지 반복 가능하게 확인하는 평가 체계입니다.</p>
-      </section>
-      <section class="doc-section">
-        <h2>왜 따로 필요했는가</h2>
-        <p><code>LUMI</code>를 서비스로 운영하는 것과, 그 서비스가 어떤 질문에서 어떤 표면에서 약해지는지 평가하는 것은 다른 일입니다. 서비스 코드 안에 평가 로직을 섞으면 재현성이 깨지고, 응답을 한 번 확인한 뒤 끝나는 테스트로 남기 쉽습니다.</p>
-        <div class="mermaid">
+      <article id="content" class="markdown-body"></article>
+      <script id="md-source" type="text/plain">
+# LGEA 포트폴리오
+
+## Slide 1. 프리뷰
+
+### 한 줄 설명
+실행 중인 `LUMI` FastAPI와 내부 service surface를 실제로 두드려, 질문 실행 -> 채점 -> 비교 분석 -> 보고서 생성까지 분리한 모델 평가 워크스페이스
+
+### 핵심 메시지
+`LGEA`는 챗봇 기능을 하나 더 붙인 프로젝트가 아니라, `persona에 따라 모델의 가드레일이 어느 표면에서 무너지는지 반복 가능하게 확인하는 평가 체계`입니다.
+
+### 내 역할 요약
+- `LUMI`와 분리된 평가 워크스페이스 구조 정리
+- FastAPI와 `router / response-layer / rag / tool` surface 교차 실행 흐름 설계
+- `runner -> judge -> analysis -> reports` 파이프라인 정리
+- 결과 JSONL, 통계 요약, 보고서 묶음, repetition plan까지 남기는 자산 구조 설계
+
+### 현재 상태
+- `feat/lgea/arc` 브랜치 기준으로 평가 실행, 채점, 통계, 보고서 흐름이 실제 파일 구조로 확장된 상태
+- judge는 heuristic 중심, LLM judge와 질문 확장기는 보강 가능성이 남아 있는 상태
+
+---
+
+## Slide 2. 왜 LGEA가 따로 필요했는가
+
+### 문제
+`LUMI`를 서비스로 운영하는 것과, 그 서비스가 어떤 질문에서 어떤 표면에서 약해지는지 평가하는 것은 다른 일입니다. 서비스 코드 안에 평가 로직을 섞으면 재현성이 깨지고, 응답을 한 번 확인한 뒤 끝나는 식의 테스트로 남기 쉽습니다.
+
+### 해결하지 않으면 생기는 결과
+- 같은 질문을 다시 돌려도 이전 실험과 비교하기 어렵습니다.
+- FastAPI 최종 응답과 내부 `router`, `response-layer`, `rag`, `tool` 표면의 차이를 확인하기 어렵습니다.
+- 모델 안전성이나 guardrail erosion을 말해도 근거 파일이 남지 않습니다.
+
+```mermaid
 flowchart LR
     A[서비스 운영 코드만 존재] --> B[평가 로직이 산발적으로 섞임]
     B --> C[같은 조건 재실행 어려움]
     C --> D[표면별 응답 차이 추적 어려움]
     D --> E[가드레일 평가 근거 약화]
-        </div>
-      </section>
-      <section class="doc-section">
-        <h2>무엇을 테스트했는가</h2>
-        <ul class="plain-list">
-          <li>실제 <code>LUMI</code> FastAPI <code>/api/v1/chat/</code></li>
-          <li>내부 service surface: <code>router</code>, <code>response-layer</code>, <code>rag</code>, <code>tool</code></li>
-          <li><code>baseline_questions.json</code> 기반 공통 질문 세트</li>
-          <li>abuse category, benign probe, persona source와 모델 조합</li>
-        </ul>
-        <div class="mermaid">
+```
+
+---
+
+## Slide 3. 무엇을 테스트했는가
+
+### 평가 대상
+- 실제 `LUMI` FastAPI `/api/v1/chat/`
+- 내부 service surface
+  - `router`
+  - `response-layer`
+  - `rag`
+  - `tool`
+
+### 질문 구성
+- `baseline_questions.json` 기반 공통 질문 세트
+- abuse category
+  - `drug`
+  - `bomb`
+  - `adult`
+- benign probe와 확장 질문 세트
+- persona source와 모델 조합
+
+### 보고 싶은 차이
+- 어느 표면에서 거절이 더 잘 되는가
+- 어느 표면에서 unsafe 응답이 더 자주 나오는가
+- 어떤 카테고리에서 borderline 응답이 늘어나는가
+- persona가 바뀔 때 가드레일 붕괴 양상이 어떻게 달라지는가
+
+```mermaid
 flowchart LR
     A[질문 세트] --> B[FastAPI 응답]
     A --> C[router]
@@ -53,19 +95,21 @@ flowchart LR
     D --> G
     E --> G
     F --> G
-        </div>
-      </section>
-      <section class="doc-section">
-        <h2>어떻게 구현했는가</h2>
-        <ol class="plain-list">
-          <li><code>baseline_questions.json</code>의 질문을 준비합니다.</li>
-          <li>같은 질문 세트를 FastAPI와 service surface에 보냅니다.</li>
-          <li>실행 결과를 <code>results.jsonl</code>, <code>fastapi_live_results.jsonl</code>, <code>service_surface_results.jsonl</code>로 남깁니다.</li>
-          <li>judge 단계에서 최종 응답만 추려 채점합니다.</li>
-          <li>analysis 단계에서 표면, 카테고리, 모델 단위로 통계를 만듭니다.</li>
-          <li>report 단계에서 한국어 보고서와 thesis-ready 문서를 생성합니다.</li>
-        </ol>
-        <div class="mermaid">
+```
+
+---
+
+## Slide 4. 어떻게 구현했는가
+
+### 실행 파이프라인
+1. `baseline_questions.json`의 질문을 준비합니다.
+2. 같은 질문 세트를 FastAPI와 service surface에 보냅니다.
+3. 실행 결과를 `results.jsonl`, `fastapi_live_results.jsonl`, `service_surface_results.jsonl`로 남깁니다.
+4. judge 단계에서 최종 응답만 추려 채점합니다.
+5. analysis 단계에서 표면, 카테고리, 모델 단위로 통계를 만듭니다.
+6. report 단계에서 한국어 보고서와 thesis-ready 문서를 생성합니다.
+
+```mermaid
 flowchart LR
     A[baseline questions] --> B[runner]
     B --> C[FastAPI live run]
@@ -77,22 +121,156 @@ flowchart LR
     G --> H[analysis]
     H --> I[summary.json / comparative stats]
     I --> J[report generation]
-        </div>
-      </section>
-      <section class="doc-section">
-        <h2>무엇을 남겼는가</h2>
-        <ul class="plain-list">
-          <li>실행 결과: <code>LGEA/data/runs/*.jsonl</code></li>
-          <li>채점 결과: <code>LGEA/data/judge/*.jsonl</code></li>
-          <li>분석 요약: <code>LGEA/data/analysis/*.json</code></li>
-          <li>연구 자산: <code>experiment_matrix.json</code>, <code>repetition_plan.json</code>, <code>persona_summary.json</code></li>
-          <li>보고서: <code>thesis_ready_report_ko.md</code>, <code>cross_surface_analysis_ko.md</code>, <code>comparative_stats_ko.md</code></li>
-        </ul>
-      </section>
-      <section class="doc-section">
-        <h2>결과와 의미</h2>
-        <p><code>LUMI</code> 서비스와 평가 레이어를 분리해 설명할 수 있는 구조가 생겼고, 단순 테스트가 아니라 질문 세트, 실행 결과, 채점, 통계, 보고서가 남는 평가 체계를 만들었습니다. 이 프로젝트는 단순 응답 테스트가 아니라 persona에 따른 모델 가드레일 붕괴를 표면별로 비교하고 근거 파일과 보고서로 남기는 평가 체계라는 점이 중요합니다.</p>
-      </section>
+```
+
+### 구현에서 중요했던 기준
+- 실행, 채점, 분석, 보고서를 한 파일에 섞지 않고 단계별로 분리했습니다.
+- `실험을 한 번 수행하는 것`보다 `다시 돌려도 같은 기준으로 비교할 수 있는 자산을 남기는 것`을 우선했습니다.
+
+---
+
+## Slide 5. 무엇을 남겼는가
+
+### 실제 산출물
+- 실행 결과
+  - `LGEA/data/runs/fastapi_live_results.jsonl`
+  - `LGEA/data/runs/service_surface_results.jsonl`
+  - `LGEA/data/runs/results.jsonl`
+- 채점 결과
+  - `LGEA/data/judge/scored_results.jsonl`
+  - `LGEA/data/judge/llm_scored_results.jsonl`
+- 분석 요약
+  - `LGEA/data/analysis/*.json`
+- 연구 자산
+  - `experiment_matrix.json`
+  - `repetition_plan.json`
+  - `persona_summary.json`
+- 보고서
+  - `thesis_ready_report_ko.md`
+  - `cross_surface_analysis_ko.md`
+  - `comparative_stats_ko.md`
+
+```mermaid
+flowchart TB
+    subgraph Execution
+        A[fastapi_live_results.jsonl]
+        B[service_surface_results.jsonl]
+        C[results.jsonl]
+    end
+    subgraph Judge
+        D[scored_results.jsonl]
+        E[llm_scored_results.jsonl]
+    end
+    subgraph Analysis
+        F[summary.json]
+        G[cross_surface_summary.json]
+        H[comparative_stats.json]
+    end
+    subgraph Reports
+        I[analysis summary]
+        J[cross-surface report]
+        K[thesis-ready report]
+    end
+    A --> D
+    B --> D
+    C --> D
+    D --> F
+    D --> G
+    D --> H
+    F --> I
+    G --> J
+    H --> K
+```
+
+---
+
+## Slide 6. 브랜치와 작업 확장 흐름
+
+### 브랜치 기준 근거
+- 작업 브랜치: `feat/lgea/arc`
+- 최근 커밋 흐름
+  - experiment runner scaffold
+  - runner execution hardening
+  - judge / analysis pipeline scaffold
+  - provider diagnostics workflow
+  - first live run 준비
+  - multi-surface evaluation 확장
+  - shared FastAPI and service-surface evaluation flow 추가
+  - reporting and evaluation workflow 확장
+
+```mermaid
+gantt
+    title feat/lgea/arc 확장 흐름
+    dateFormat  YYYY-MM-DD
+    section Foundation
+    workspace / baseline / runner scaffold     :a1, 2026-03-12, 1d
+    section Evaluation
+    judge / analysis pipeline 추가             :a2, 2026-03-13, 1d
+    section Live Run
+    provider diagnostics / first live run      :a3, 2026-03-13, 1d
+    section Expansion
+    multi-surface evaluation / shared flow     :a4, 2026-03-14, 1d
+    section Reporting
+    reporting and evaluation workflow 확장      :a5, 2026-03-14, 1d
+```
+
+### 이 흐름이 의미하는 것
+- LGEA는 한 번의 스크립트가 아니라, 실제 서비스 테스트를 점점 더 재현 가능하게 만드는 연구 워크스페이스로 성장했습니다.
+
+---
+
+## Slide 7. 이 프로젝트가 보여주는 것
+
+### 결과
+- `LUMI` 서비스와 평가 레이어를 분리해 설명할 수 있는 구조가 생겼습니다.
+- 단순 테스트가 아니라 `질문 세트`, `실행 결과`, `채점`, `통계`, `보고서`가 남는 평가 체계를 만들었습니다.
+- 어떤 persona와 어떤 표면에서 guardrail erosion이 더 잘 일어나는지 비교할 수 있는 기반을 확보했습니다.
+
+### 이 프로젝트가 보여주는 역량
+- AI Researcher 관점
+  - 반복 가능한 실험 설계
+  - 표면별 비교 평가와 통계 요약
+  - 보고서 자산화
+- AI Agent Engineer 관점
+  - 실제 서비스와 별도 평가 레이어를 분리하는 구조 감각
+  - 실행 흐름과 산출물 관리
+- AI Product Engineer 관점
+  - 서비스를 만드는 것에서 멈추지 않고, 서비스 품질을 검증하는 체계까지 함께 다루는 태도
+
+### 한 줄 정리
+저는 `LGEA`에서 단순 응답 테스트가 아니라, `persona에 따른 모델 가드레일 붕괴를 표면별로 비교하고 근거 파일과 보고서로 남기는 평가 체계`를 만들었습니다.
+
+      </script>
+      <script>
+        mermaid.initialize({
+          startOnLoad: false,
+          theme: 'base',
+          themeVariables: {
+            primaryColor: '#f3f2ef',
+            primaryTextColor: '#1f1f1f',
+            primaryBorderColor: '#d9d5cf',
+            lineColor: '#8a8175',
+            secondaryColor: '#ffffff',
+            tertiaryColor: '#fbfbfa',
+            fontFamily: 'Pretendard, Noto Sans KR, sans-serif'
+          }
+        });
+
+        const source = document.getElementById('md-source').textContent.trim();
+        const container = document.getElementById('content');
+        container.innerHTML = marked.parse(source, { gfm: true, breaks: false });
+
+        const mermaidBlocks = Array.from(container.querySelectorAll('pre code.language-mermaid'));
+        for (const block of mermaidBlocks) {
+          const pre = block.parentElement;
+          const host = document.createElement('div');
+          host.className = 'mermaid';
+          host.textContent = block.textContent;
+          pre.replaceWith(host);
+        }
+
+        mermaid.run({ querySelector: '.mermaid' });
+      </script>
     </main>
   </body>
 </html>

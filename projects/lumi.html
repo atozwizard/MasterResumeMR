@@ -5,37 +5,64 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>LUMI | 이영기</title>
     <link rel="stylesheet" href="../styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
-    <script>
-      mermaid.initialize({ startOnLoad: true, theme: 'base', themeVariables: { primaryColor: '#f3f2ef', primaryTextColor: '#1f1f1f', primaryBorderColor: '#d9d5cf', lineColor: '#8a8175', secondaryColor: '#ffffff', tertiaryColor: '#fbfbfa', fontFamily: 'Pretendard, Noto Sans KR, sans-serif' } });
-    </script>
   </head>
   <body>
     <main class="doc">
       <nav class="top-nav"><a href="../index.html">Home</a></nav>
       <header class="doc-header">
         <p class="eyebrow">05. LUMI</p>
-        <h1>구조, 아키텍처, 배포, LLMOps를 학습하기 위한 교육과정 산출물</h1>
-        <p class="lede">청년취업사관학교 교육과정 안에서, 상태 유지, fallback, 비용 추적, tracing까지 포함한 운영 가능한 캐릭터형 AI 서비스 구조를 학습하고 구현하기 위해 진행한 LangGraph 기반 AI 백엔드 프로젝트입니다.</p>
       </header>
-      <section class="doc-section">
-        <h2>핵심 메시지</h2>
-        <p><code>LUMI</code>의 핵심은 캐릭터 답변 그 자체가 아니라, 서비스 구조, 아키텍처, 배포, LLMOps까지 포함한 전 과정을 학습용 산출물로 만드는 것이었습니다.</p>
-      </section>
-      <section class="doc-section">
-        <h2>왜 필요했는가</h2>
-        <p>캐릭터형 챗봇은 답변을 한 번 생성하는 것으로 끝나지 않습니다. 관계 맥락을 유지해야 하고, 여러 데이터 소스를 연결해야 하며, 실패와 비용을 추적할 수 있어야 실제 서비스로 운영할 수 있습니다. 교육과정 안에서 서비스형 AI를 끝까지 경험하려면 이 전체 구조를 직접 다뤄볼 필요가 있었습니다.</p>
-      </section>
-      <section class="doc-section">
-        <h2>무엇을 했는가</h2>
-        <ul class="plain-list">
-          <li>서비스 구조, 아키텍처, 배포, LLMOps를 함께 학습하는 본체 프로젝트로 진행</li>
-          <li>FastAPI, LangGraph, checkpointer, tracing, token/cost tracking, RAG, fallback 구조를 다룸</li>
-          <li><code>app/graph/state.py</code>, <code>nodes.py</code>, <code>edges.py</code>, <code>graph.py</code>를 통해 대화 흐름 구현</li>
-          <li><code>app/core/llm.py</code>, <code>checkpointer.py</code>, <code>token_counter.py</code>, <code>cost_tracker.py</code>, <code>tracing.py</code>로 운영 요소 분리</li>
-          <li><code>app/repositories/rag.py</code>, <code>schedule.py</code>, <code>fan_letter.py</code>, <code>conversation.py</code>로 저장소 계층 분리</li>
-        </ul>
-        <div class="mermaid">
+      <article id="content" class="markdown-body"></article>
+      <script id="md-source" type="text/plain">
+# LUMI 포트폴리오
+
+## Slide 1. 프리뷰
+
+### 한 줄 설명
+청년취업사관학교 교육과정 안에서, 상태 유지, fallback, 비용 추적, tracing까지 포함한 `운영 가능한 캐릭터형 AI 서비스 구조`를 학습하고 구현하기 위해 진행한 LangGraph 기반 AI 백엔드 프로젝트
+
+### 핵심 메시지
+`LUMI`의 핵심은 캐릭터 답변 그 자체가 아니라, `서비스 구조, 아키텍처, 배포, LLMOps까지 포함한 전 과정을 학습용 산출물로 만드는 것`이었습니다.
+
+### 내 역할 요약
+- 교육과정 안에서 서비스형 AI 구조와 아키텍처 학습
+- LangGraph 기반 상태 흐름, fallback, checkpointer, token/cost tracking 구조 구현 및 정리
+- RAG, 일정 조회, 팬레터 생성 등 저장소 계층이 분리된 서비스 구조 확인
+
+---
+
+## Slide 2. 왜 이 프로젝트가 필요했는가
+
+### 문제
+캐릭터형 챗봇은 답변을 한 번 생성하는 것으로 끝나지 않습니다. 관계 맥락을 유지해야 하고, 여러 데이터 소스를 연결해야 하며, 실패와 비용을 추적할 수 있어야 실제 서비스로 운영할 수 있습니다.
+
+### 해결하지 않으면 생기는 결과
+- 대화가 이어질수록 맥락이 흐려집니다.
+- RAG, 일정 조회, 팬레터 생성이 한 덩어리로 섞여 유지보수가 어려워집니다.
+- fallback, tracing, cost tracking이 없으면 운영 문제가 생겨도 원인을 찾기 어렵습니다.
+- 교육과정 안에서 서비스형 AI를 끝까지 경험하기 어렵습니다.
+
+```mermaid
+flowchart LR
+    A[캐릭터 응답 생성만 구현] --> B[관계 맥락 유지 어려움]
+    B --> C[기능 확장 시 구조 혼잡]
+    C --> D[운영 비용 / 실패 추적 어려움]
+    D --> E[서비스화 한계]
+```
+
+---
+
+## Slide 3. 어떻게 구조를 잡았는가
+
+### 서비스 구조
+- FastAPI와 UI를 연결하되 API/서비스 레이어를 분리했습니다.
+- LangGraph `state`, `nodes`, `edges`, `graph` 구조로 대화 흐름을 만들었습니다.
+- `core/llm.py`, `checkpointer.py`, `token_counter.py`, `cost_tracker.py`, `tracing.py`를 분리해 운영 기능을 따로 다뤘습니다.
+- RAG, 일정 조회, 팬레터 생성, 대화 저장을 저장소 계층으로 나눴습니다.
+
+```mermaid
 flowchart LR
     A[FastAPI / UI] --> B[LangGraph state]
     B --> C[nodes / edges / graph]
@@ -46,25 +73,158 @@ flowchart LR
     C --> H[LLM / fallback]
     H --> I[token / cost tracking]
     H --> J[tracing]
-        </div>
-      </section>
-      <section class="doc-section">
-        <h2>LGEA와의 관계</h2>
-        <p><code>LUMI</code>는 서비스를 만드는 프로젝트이고, <code>LGEA</code>는 그 서비스가 어떤 질문에서 어떻게 반응하는지를 평가하는 프로젝트입니다. 이 둘을 분리해야 서비스 코드와 평가 코드가 서로 오염되지 않고, 운영과 연구를 각각 설명할 수 있습니다.</p>
-        <div class="mermaid">
+```
+
+---
+
+## Slide 4. 내가 맡은 구현 근거
+
+### 실제로 다룬 부분
+- `app/graph/state.py`, `nodes.py`, `edges.py`, `graph.py`
+  - LangGraph 기반 대화 흐름 구현
+- `app/core/llm.py`
+  - LLM 호출 계층 정리
+- `app/core/checkpointer.py`
+  - 상태 지속성 구조
+- `app/core/token_counter.py`, `app/core/cost_tracker.py`
+  - 토큰/비용 추적
+- `app/core/tracing.py`
+  - 관측 가능성 확보
+- `app/repositories/rag.py`, `schedule.py`, `fan_letter.py`, `conversation.py`
+  - 데이터 소스와 기능별 저장소 분리
+
+### 왜 이게 중요한가
+- 이 프로젝트는 캐릭터 응답 생성보다, `서비스로 운영하기 위한 기본 구조`를 어디까지 갖췄는지가 핵심입니다.
+
+---
+
+## Slide 5. 무엇을 남겼는가
+
+### 산출물과 근거
+- 서비스 진입점
+  - `app/main.py`
+  - `app/ui.py`
+- 핵심 운영 요소
+  - fallback
+  - checkpointer
+  - token counter
+  - cost tracker
+  - tracing
+- 기능 저장소 분리
+  - RAG
+  - 일정 조회
+  - 팬레터 생성
+  - 대화 이력 저장
+
+```mermaid
+flowchart TB
+    subgraph Service
+        A[FastAPI]
+        B[UI]
+        C[LangGraph]
+    end
+    subgraph Ops
+        D[checkpointer]
+        E[fallback]
+        F[token counter]
+        G[cost tracker]
+        H[tracing]
+    end
+    subgraph Repositories
+        I[RAG]
+        J[schedule]
+        K[fan letter]
+        L[conversation]
+    end
+    A --> C
+    B --> C
+    C --> D
+    C --> E
+    C --> I
+    C --> J
+    C --> K
+    C --> L
+    E --> F
+    E --> G
+    E --> H
+```
+
+---
+
+## Slide 6. LGEA와의 관계
+
+### 왜 LGEA가 따로 붙는가
+`LUMI`는 서비스를 만드는 프로젝트이고, `LGEA`는 그 서비스가 어떤 질문에서 어떻게 반응하는지를 평가하는 프로젝트입니다. 이 둘을 분리해야 서비스 코드와 평가 코드가 서로 오염되지 않고, 운영과 연구를 각각 설명할 수 있습니다.
+
+### 이 문서에서 강조할 점
+- `LUMI`
+  - 교육과정 안에서 서비스 구조, 아키텍처, LLMOps를 학습하기 위한 본체
+- `LGEA`
+  - 그 서비스를 실제로 두드려 보는 평가 체계
+
+```mermaid
 flowchart LR
-    A[LUMI] --> B[상태 유지 / fallback / tracing]
+    A[LUMI]
+    A --> B[상태 유지 / fallback / tracing]
     A --> C[RAG / schedule / fan letter]
-    D[LGEA] --> E[질문 실행]
+    D[LGEA]
+    D --> E[질문 실행]
     D --> F[채점 / 비교 / 분석]
     D --> G[보고서 생성]
     A -. 평가 대상 .-> D
-        </div>
-      </section>
-      <section class="doc-section">
-        <h2>결과와 의미</h2>
-        <p>단순 캐릭터 챗봇이 아니라, 상태 유지와 운영 추적이 가능한 AI 서비스 본체를 교육과정 산출물로 구현했습니다. 여러 기능을 저장소 계층으로 나눠 서비스 확장성과 유지보수성을 확보했고, 이후 <code>LGEA</code>가 이 서비스를 평가하는 별도 레이어로 붙을 수 있는 기반이 됐습니다.</p>
-      </section>
+```
+
+---
+
+## Slide 7. 결과와 이 프로젝트가 보여주는 것
+
+### 결과
+- 단순 캐릭터 챗봇이 아니라, 상태 유지와 운영 추적이 가능한 AI 서비스 본체를 교육과정 산출물로 구현했습니다.
+- 여러 기능을 저장소 계층으로 나눠 서비스 확장성과 유지보수성을 확보했습니다.
+- 이후 `LGEA`가 이 서비스를 평가하는 별도 레이어로 붙을 수 있는 기반이 됐습니다.
+
+### 이 프로젝트가 보여주는 역량
+- AI Agent Engineer 관점
+  - 상태 흐름, graph 구조, fallback 설계
+- AI Product Engineer 관점
+  - 사용자 경험을 서비스 구조로 옮기는 감각
+- 공통
+  - 답변 생성보다 운영 가능한 구조를 먼저 세우는 태도
+
+### 한 줄 정리
+저는 `LUMI`에서 캐릭터 답변 하나보다, `서비스 구조, 아키텍처, 배포와 LLMOps까지 학습할 수 있는 운영형 AI 본체`를 만드는 데 집중했습니다.
+
+      </script>
+      <script>
+        mermaid.initialize({
+          startOnLoad: false,
+          theme: 'base',
+          themeVariables: {
+            primaryColor: '#f3f2ef',
+            primaryTextColor: '#1f1f1f',
+            primaryBorderColor: '#d9d5cf',
+            lineColor: '#8a8175',
+            secondaryColor: '#ffffff',
+            tertiaryColor: '#fbfbfa',
+            fontFamily: 'Pretendard, Noto Sans KR, sans-serif'
+          }
+        });
+
+        const source = document.getElementById('md-source').textContent.trim();
+        const container = document.getElementById('content');
+        container.innerHTML = marked.parse(source, { gfm: true, breaks: false });
+
+        const mermaidBlocks = Array.from(container.querySelectorAll('pre code.language-mermaid'));
+        for (const block of mermaidBlocks) {
+          const pre = block.parentElement;
+          const host = document.createElement('div');
+          host.className = 'mermaid';
+          host.textContent = block.textContent;
+          pre.replaceWith(host);
+        }
+
+        mermaid.run({ querySelector: '.mermaid' });
+      </script>
     </main>
   </body>
 </html>
