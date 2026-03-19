@@ -1,12 +1,29 @@
-# 이영기 포트폴리오
+# 이영기 | AI Agent Engineer · AI Product Engineer · AI Researcher
 
-| 이영기 \| AI Engineer · AI Researcher · Backend Engineer · Product Engineer | 연락 및 링크 |
-| :-- | :-- |
-| 현장의 결핍을 구조화해 설명 가능한 시스템으로 바꾸는 개발자입니다. 교육 영업, 브랜드 운영, 창업과 실패, AI 전환 이후의 프로젝트 경험을 하나의 축으로 묶어 `문제를 기술 구조로 번역하고 다시 서비스로 연결하는 일`을 해 왔습니다. | Email: `at.oz.wizard@gmail.com`  <br> [GitHub](https://github.com/atozwizard) <br> [Gist](https://gist.github.com/atozwizard) <br> [개발자 스토리](./developer-story.md) <br> [랜딩 페이지](./index.html) |
+현장의 문제를 흐름과 구조로 풀어, 운영 가능한 AI로 만드는 엔지니어입니다.
 
-| 구분 | 내용 |
-| :-- | :-- |
-| **대표 프로젝트** | **기업 분석 프로젝트 `company_analyzer`**  <br> 기업 요구와 사용자 경험을 같은 분석 언어로 연결하는 멀티에이전트 구조  <br> [프로젝트 보기](./projects/company_analyzer.md)  <br><br> **기업 분석 고도화 프로젝트 `company_analyzer_v2`**  <br> HybridRAG와 포트폴리오 생성 흐름까지 확장한 분석 고도화 버전  <br> [프로젝트 보기](./projects/company_analyzer_v2.md)  <br><br> **저장소 분석 프로젝트 `job-analyzer`**  <br> AST와 의미 분석을 결합해 저장소를 JD와 연결하는 구조 분석 프로젝트  <br> [프로젝트 보기](./projects/job-analyzer.md)  <br><br> **무역 온보딩 에이전트 `trade-onboarding-agent`**  <br> 상태 흐름 안정성과 비동기 처리 정합성을 다룬 온보딩 에이전트  <br> [프로젝트 보기](./projects/trade-onboarding-agent.md)  <br><br> **운영형 아이돌 에이전트 `idol_agent_LUMI`**  <br> fallback, checkpoint, tracing을 포함한 운영형 AI 서비스 구조  <br> [프로젝트 보기](./projects/idol_agent_LUMI.md)  <br><br> **LGEA 연구 브랜치 `idol_agent_LUMI feat/lgea/arc`**  <br> LLM 평가와 guardrail erosion 연구 목적 브랜치  <br> [프로젝트 보기](./projects/idol_agent_LUMI_feat_lgea_arc.md)  <br><br> **제품 경험 프로젝트 `poketdogam`**  <br> 사용자 경험과 서비스 전달 구조를 전면에 둔 제품형 프로젝트  <br> [프로젝트 보기](./projects/poketdogam.md) |
-| **경험 · 활동** | **한솔교육**  <br> 영업 및 교육 관리 경험을 통해 운영 구조와 성과 확장 문제를 다뤘고, 관리 수업 수를 `50 -> 150`으로 확장하며 `300%` 성장 경험을 만들었습니다.  <br><br> **브랜드 운영 및 창업**  <br> `커피소녀오즈`, `우동오즈`, `쿤타치 자가제면`, `리틀방콕 중계그린점`을 거치며 상권, 동선, 조리 병목, 고객 경험 문제를 직접 다뤘습니다.  <br><br> **AI 전환과 협업**  <br> SESAC x UPSTAGE AI Agent 과정 이후 공개 저장소 기반 프로젝트를 지속적으로 구현하고 문서화하고 있습니다. 발표, 스터디, 코딩테스트, POMMIT 협업을 통해 학습을 산출물로 전환하고 있습니다. |
-| **기술 · 포지셔닝** | Python, FastAPI, LangChain, LangGraph, RAG, AST 분석  <br><br> `AI Engineer` · `AI Researcher - NLP, LLM` · `Backend Engineer` · `Product Engineer` |
-| **추가 문서** | [이력서](./resume.md) <br> [포트폴리오](./portfolio.md) <br> [자기소개서](./cover-letter.md) <br> [프로젝트 모음](./projects/README.md) |
+창업과 외식업 운영, 프랜차이즈 현장에서 고객 경험, 병목, 서비스 품질, 인력 운영 문제를 직접 다뤘습니다. 지금은 그 경험에서 익힌 문제 구조화 방식과 운영 감각을 AI Agent, AI Product, AI Research 프로젝트에 적용하고 있습니다.
+
+## 바로 보기
+- [Portfolio](./portfolio.md)
+- [Resume](./resume.md)
+- [Cover Letter](./cover-letter.md)
+- [Projects](./projects/README.md)
+- [Landing Page](./index.html)
+
+## 대표 프로젝트
+- [POMMIT](./projects/pommit.md)
+- [LGEA](./projects/lgea.md)
+- [trade-onboarding-agent](./projects/trade-onboarding-agent.md)
+- [poketdogam](./projects/poketdogam.md)
+- [LUMI](./projects/lumi.md)
+
+## 한 줄 요약
+- `POMMIT`: service_agent의 HTML 정리, 텍스트 정제, 단어 빈도 추출, collector 전달 구조를 다루고 HybridRAG 확장 방향을 검토한 프로젝트
+- `LGEA`: persona에 따른 모델 가드레일 붕괴를 반복 가능하게 비교하는 평가 워크스페이스
+- `trade-onboarding-agent`: 무역 도메인 RAG와 riskmanaging agent 흐름을 중심으로 정리한 멀티에이전트 미니프로젝트
+- `poketdogam`: OCR, 후보 확인, fallback, trace를 포함한 멀티모달 사용자 흐름 프로젝트
+- `LUMI`: 구조, 아키텍처, 배포, LLMOps까지 학습하기 위한 교육과정 기반 서비스 본체
+
+## 경력의 의미
+이전 경력을 AI 실무 연차처럼 환산하지 않습니다. 대신 고객이 어디서 멈추는지, 공정이 어디서 막히는지, 서비스가 왜 흔들리는지부터 보고 문제를 단계와 기준으로 다시 나누는 방식으로 일해 왔습니다. 지금의 AI 프로젝트에서도 같은 방식으로 입력, 상태, 판단, 출력, 검증 구조를 먼저 보고 작업합니다.

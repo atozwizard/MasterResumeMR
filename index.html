@@ -3,123 +3,87 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>이영기 포트폴리오</title>
+    <title>이영기 | AI Portfolio</title>
     <meta
       name="description"
-      content="현장의 결핍을 구조화해 설명 가능한 시스템으로 바꾸는 개발자 이영기의 공개 포트폴리오"
+      content="현장의 문제를 흐름과 구조로 풀어, 운영 가능한 AI로 만드는 엔지니어 이영기의 포트폴리오"
     />
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
     <div class="shell">
       <nav class="nav">
-        <strong>이영기 포트폴리오</strong>
+        <strong>이영기 | AI Portfolio</strong>
         <div class="nav-links">
-          <a href="#summary">요약</a>
-          <a href="#story">스토리</a>
-          <a href="#projects">프로젝트</a>
-          <a href="#experience">경험</a>
+          <a href="#summary">Summary</a>
+          <a href="#projects">Projects</a>
+          <a href="#experience">Experience</a>
+          <a href="#links">Links</a>
         </div>
       </nav>
 
       <section class="hero" id="summary">
-        <article class="panel">
-          <div class="eyebrow">Master Resume</div>
-          <h1>현장의 결핍을 구조화해 설명 가능한 시스템으로 바꾸는 개발자</h1>
+        <article class="panel hero-main">
+          <div class="eyebrow">AI Agent Engineer · AI Product Engineer · AI Researcher</div>
+          <h1>현장의 문제를 흐름과 구조로 풀어, 운영 가능한 AI로 만드는 엔지니어</h1>
           <p class="lead">
-            교육 영업, 브랜드 운영, 창업과 실패, AI 전환 이후의 프로젝트 경험을 하나의 축으로 묶어
-            문제를 기술 구조로 번역하고 다시 서비스로 연결합니다.
+            창업과 외식업 운영, 프랜차이즈 현장에서 고객 경험, 병목, 서비스 품질, 인력 운영 문제를 직접 다뤘습니다.
+            지금은 그 경험에서 익힌 문제 구조화 방식과 운영 감각을 AI Agent, AI Product, AI Research 프로젝트에 적용하고 있습니다.
           </p>
           <div class="actions">
-            <a class="button primary" href="https://github.com/atozwizard/MasterResumeMR/blob/masterresume/README.md">README 보기</a>
-            <a class="button secondary" href="https://github.com/atozwizard/MasterResumeMR/blob/masterresume/developer-story.md">개발자 스토리</a>
-            <a class="button secondary" href="https://github.com/atozwizard/MasterResumeMR/blob/masterresume/projects/README.md">프로젝트 모음</a>
+            <a class="button primary" href="./portfolio.md">Portfolio</a>
+            <a class="button secondary" href="./resume.md">Resume</a>
+            <a class="button secondary" href="./cover-letter.md">Cover Letter</a>
+            <a class="button secondary" href="./projects/README.md">Projects</a>
           </div>
         </article>
 
-        <aside class="panel">
-          <div class="eyebrow">한눈에 보기</div>
+        <aside class="panel hero-side">
+          <div class="eyebrow">Core Focus</div>
           <div class="meta-list">
             <div class="meta-row">
-              <div class="meta-label">포지션</div>
-              <div class="meta-value">AI Engineer · AI Researcher - NLP, LLM · Backend Engineer · Product Engineer</div>
+              <div class="meta-label">문제 방식</div>
+              <div class="meta-value">입력, 상태, 판단, 출력, 검증 구조로 문제를 다시 나눕니다.</div>
             </div>
             <div class="meta-row">
-              <div class="meta-label">핵심 강점</div>
-              <div class="meta-value">문제 구조화, 근거 기반 설명, 운영형 AI 서비스 설계, README 기반 문서화</div>
+              <div class="meta-label">기술 축</div>
+              <div class="meta-value">FastAPI, LangGraph, RAG, fallback, tracing, 평가 파이프라인</div>
             </div>
             <div class="meta-row">
-              <div class="meta-label">대표 기술</div>
-              <div class="meta-value">Python, FastAPI, LangChain, LangGraph, RAG, AST 분석</div>
-            </div>
-            <div class="meta-row">
-              <div class="meta-label">링크</div>
-              <div class="meta-value">
-                <a href="https://github.com/atozwizard">GitHub</a> /
-                <a href="https://gist.github.com/atozwizard">Gist</a>
-              </div>
+              <div class="meta-label">대표 프로젝트</div>
+              <div class="meta-value">POMMIT · LGEA · trade-onboarding-agent · poketdogam · LUMI</div>
             </div>
           </div>
         </aside>
       </section>
 
-      <section class="section" id="story">
-        <div class="section-head">
-          <div>
-            <div class="eyebrow">Story</div>
-            <h2>개발자 스토리</h2>
-          </div>
-        </div>
-        <article class="panel">
-          <p class="quote">"감각에 의존하던 현장 문제를, 반복 가능하고 설명 가능한 시스템으로 바꾸는 일."</p>
-          <div class="story-list">
-            <p>
-              교육 영업 현장에서는 성과가 나더라도 왜 그런지 설명되지 않는 문제가 있었습니다. 브랜드 운영과 창업 현장에서는
-              상권 제약, 조리 병목, 고객 경험의 흔들림, 운영 비효율을 직접 겪었습니다.
-            </p>
-            <p>
-              여러 번의 창업과 실패를 거치며 감각만으로는 같은 문제를 반복하게 되고, 문제를 구조로 바꾸고 원인을 설명할 수
-              있어야 다음 개선이 가능하다는 점을 배웠습니다.
-            </p>
-            <p>
-              AI 전환 이후에는 이 경험을 기반으로 `company_analyzer`, `job-analyzer`, `trade-onboarding-agent`,
-              `idol_agent_LUMI`, `poketdogam` 같은 프로젝트를 구현하며 설명 가능한 분석과 운영형 AI 서비스 구조를 만들고 있습니다.
-            </p>
-          </div>
-        </article>
-      </section>
-
       <section class="section" id="projects">
         <div class="section-head">
           <div>
-            <div class="eyebrow">Projects</div>
-            <h2>대표 프로젝트</h2>
+            <div class="eyebrow">Featured Projects</div>
+            <h2>대표 프로젝트 5개</h2>
           </div>
         </div>
         <div class="project-grid">
-          <article class="card">
-            <h3><a href="https://github.com/atozwizard/MasterResumeMR/blob/masterresume/projects/company_analyzer.md">기업 분석 프로젝트 `company_analyzer`</a></h3>
-            <p>기업 요구와 사용자 경험을 같은 분석 언어로 연결하는 멀티에이전트 구조</p>
+          <article class="card accent-card">
+            <h3><a href="./projects/pommit.md">POMMIT</a></h3>
+            <p>service_agent의 HTML 정리, 텍스트 정제, 단어 빈도 추출, collector 전달 구조를 정리하고 HybridRAG 확장 방향을 검토한 프로젝트</p>
           </article>
-          <article class="card">
-            <h3><a href="https://github.com/atozwizard/MasterResumeMR/blob/masterresume/projects/company_analyzer_v2.md">기업 분석 고도화 프로젝트 `company_analyzer_v2`</a></h3>
-            <p>HybridRAG와 포트폴리오 생성 흐름까지 확장한 분석 고도화 버전</p>
+          <article class="card accent-card">
+            <h3><a href="./projects/lgea.md">LGEA</a></h3>
+            <p>persona에 따른 모델 가드레일 붕괴를 반복 가능하게 비교하는 평가 워크스페이스</p>
           </article>
-          <article class="card">
-            <h3><a href="https://github.com/atozwizard/MasterResumeMR/blob/masterresume/projects/job-analyzer.md">저장소 분석 프로젝트 `job-analyzer`</a></h3>
-            <p>AST와 의미 분석을 결합해 저장소를 JD와 연결하는 구조 분석 프로젝트</p>
+          <article class="card accent-card">
+            <h3><a href="./projects/trade-onboarding-agent.md">trade-onboarding-agent</a></h3>
+            <p>무역 도메인 RAG와 riskmanaging agent 흐름을 중심으로 정리한 멀티에이전트 미니프로젝트</p>
           </article>
-          <article class="card">
-            <h3><a href="https://github.com/atozwizard/MasterResumeMR/blob/masterresume/projects/trade-onboarding-agent.md">무역 온보딩 에이전트 `trade-onboarding-agent`</a></h3>
-            <p>상태 흐름 안정성과 비동기 처리 정합성을 다룬 온보딩 에이전트</p>
+          <article class="card accent-card">
+            <h3><a href="./projects/poketdogam.md">poketdogam</a></h3>
+            <p>OCR, 후보 확인, fallback, trace를 포함한 멀티모달 사용자 흐름 프로젝트</p>
           </article>
-          <article class="card">
-            <h3><a href="https://github.com/atozwizard/MasterResumeMR/blob/masterresume/projects/idol_agent_LUMI.md">운영형 아이돌 에이전트 `idol_agent_LUMI`</a></h3>
-            <p>fallback, checkpoint, tracing을 포함한 운영형 AI 서비스 구조</p>
-          </article>
-          <article class="card">
-            <h3><a href="https://github.com/atozwizard/MasterResumeMR/blob/masterresume/projects/poketdogam.md">제품 경험 프로젝트 `poketdogam`</a></h3>
-            <p>사용자 경험과 서비스 전달 구조를 전면에 둔 제품형 프로젝트</p>
+          <article class="card accent-card">
+            <h3><a href="./projects/lumi.md">LUMI</a></h3>
+            <p>구조, 아키텍처, 배포, LLMOps까지 학습하기 위해 진행한 교육과정 기반 서비스 본체</p>
           </article>
         </div>
       </section>
@@ -127,50 +91,56 @@
       <section class="section" id="experience">
         <div class="section-head">
           <div>
-            <div class="eyebrow">Experience</div>
-            <h2>경험 요약</h2>
+            <div class="eyebrow">Earlier Experience</div>
+            <h2>이전 경력이 지금으로 이어지는 방식</h2>
           </div>
         </div>
         <div class="grid-2">
           <article class="card">
-            <h3>교육과 운영</h3>
-            <p>
-              한솔교육에서 영업 및 교육 관리 경험을 통해 운영 구조와 성과 확장 문제를 다뤘습니다. 관리 수업 수를
-              `50 -> 150`으로 확장하고 `300%` 성장 경험을 만들었습니다.
-            </p>
+            <h3>커피소녀오즈 / 우동오즈 / 쿤타치</h3>
+            <p>고객 경험, 점심 피크타임 병목, 메뉴 설계, B2B 납품, 공정 조정 문제를 직접 다뤘습니다.</p>
           </article>
           <article class="card">
-            <h3>브랜드 운영과 창업</h3>
-            <p>
-              `커피소녀오즈`, `우동오즈`, `쿤타치 자가제면`, `리틀방콕 중계그린점`을 거치며 상권, 동선, 조리 병목,
-              고객 경험 문제를 직접 다뤘습니다.
-            </p>
+            <h3>리틀방콕 중계그린점</h3>
+            <p>25평 규모 매장에서 HR, 근태, 홀 교육, CS 운영, 프랜차이즈 표준과 현장 실행의 간극을 경험했습니다.</p>
           </article>
           <article class="card">
-            <h3>AI 전환</h3>
-            <p>
-              SESAC x UPSTAGE AI Agent 과정 이후 공개 저장소 기반 프로젝트를 지속적으로 구현하고 문서화하고 있습니다.
-            </p>
+            <h3>한솔교육</h3>
+            <p>1개 지역 50개 수업에서 3개 지역 150개 수업 운영까지 확장하며 운영 구조와 성과를 연결했습니다.</p>
           </article>
           <article class="card">
-            <h3>학습 방식</h3>
-            <p>
-              발표, 스터디, 코딩테스트, POMMIT 협업을 통해 학습을 산출물로 전환하고, 프로젝트 README와 보고서로 근거를
-              남기고 있습니다.
-            </p>
+            <h3>현재의 방식</h3>
+            <p>이전 경력을 AI 연차처럼 환산하지 않고, 고객이 어디서 멈추는지와 공정이 어디서 막히는지부터 보는 방식으로 지금의 AI 프로젝트를 다룹니다.</p>
           </article>
         </div>
       </section>
 
-      <footer class="footer">
-        <p>
-          더 자세한 내용은
-          <a href="https://github.com/atozwizard/MasterResumeMR/blob/masterresume/README.md">README</a>,
-          <a href="https://github.com/atozwizard/MasterResumeMR/blob/masterresume/portfolio.md">Portfolio</a>,
-          <a href="https://github.com/atozwizard/MasterResumeMR/blob/masterresume/projects/README.md">Projects</a>
-          에서 확인할 수 있습니다.
-        </p>
-      </footer>
+      <section class="section" id="links">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">Links</div>
+            <h2>바로 이동</h2>
+          </div>
+        </div>
+        <div class="link-grid">
+          <a class="link-card" href="./portfolio.md">
+            <strong>Portfolio</strong>
+            <span>상세 서사와 대표 프로젝트 설명</span>
+          </a>
+          <a class="link-card" href="./resume.md">
+            <strong>Resume</strong>
+            <span>제출형 이력서 요약</span>
+          </a>
+          <a class="link-card" href="./cover-letter.md">
+            <strong>Cover Letter</strong>
+            <span>직무 고려 마스터 자기소개서</span>
+          </a>
+          <a class="link-card" href="./projects/README.md">
+            <strong>Projects</strong>
+            <span>대표 프로젝트 5개 상세 링크</span>
+          </a>
+        </div>
+      </section>
     </div>
   </body>
 </html>
