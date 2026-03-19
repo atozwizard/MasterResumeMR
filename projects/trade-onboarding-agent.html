@@ -1,10 +1,57 @@
 ﻿<!DOCTYPE html>
 <html lang="ko">
-  <head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>trade-onboarding-agent | 이영기</title><link rel="stylesheet" href="../styles.css" /></head>
-  <body><main class="doc"><nav class="top-nav"><a href="../index.html">Home</a></nav><header class="doc-header"><p class="eyebrow">03. trade-onboarding-agent</p><h1>RAG와 riskmanaging agent를 중심으로 다룬 무역 온보딩 미니프로젝트</h1></header>
-  <section class="doc-section"><h2>프리뷰</h2><p>무역 실무 온보딩을 위해 <code>RAG 기반 지식 검색</code>과 <code>riskmanaging agent</code>를 중심으로 구성한 멀티에이전트 미니프로젝트입니다.</p></section>
-  <section class="doc-section"><h2>내 역할</h2><ul class="plain-list"><li>무역 도메인 데이터 기반 RAG 구조 확인 및 정리</li><li><code>riskmanaging agent</code> 흐름과 관련 문서, 데이터, 처리 구조 파악</li><li>프로젝트 저장소 기준으로 백엔드 구조와 API 흐름 정리</li></ul></section>
-  <section class="doc-section"><h2>어떻게 작동하는가</h2><p>무역 도메인 데이터셋을 정리하고 <code>ingest.py</code>를 통해 ChromaDB에 임베딩 기반 검색 자산을 만든 뒤, 사용자가 리스크 관련 질문을 보내면 <code>riskmanaging agent</code>가 필요한 정보를 대화형으로 수집합니다. 이후 RAG 검색으로 관련 무역 문서를 찾고, 이를 바탕으로 리스크를 평가해 리포트 형태의 결과를 반환합니다.</p></section>
-  <section class="doc-section"><h2>왜 중요한가</h2><p>이 프로젝트는 단순 용어 검색이 아니라, 리스크 질문을 대화형으로 수집하고 RAG 근거를 붙여 응답하는 흐름을 다룬 프로젝트입니다. 제가 직접 확인하고 정리한 RAG와 riskmanaging 중심 작업 범위로 설명할 수 있다는 점이 중요합니다.</p></section>
-  </main></body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>trade-onboarding-agent | 이영기</title>
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body>
+    <main class="doc">
+      <nav class="top-nav"><a href="../index.html">Home</a></nav>
+      <header class="doc-header">
+        <p class="eyebrow">03. trade-onboarding-agent</p>
+        <h1>RAG와 riskmanaging agent를 중심으로 다룬 무역 온보딩 미니프로젝트</h1>
+        <p class="lede">무역 실무 온보딩을 위해 <code>RAG 기반 지식 검색</code>과 <code>riskmanaging agent</code>를 중심으로 구성한 멀티에이전트 미니프로젝트입니다.</p>
+      </header>
+      <section class="doc-section">
+        <h2>핵심 메시지</h2>
+        <p>이 프로젝트에서 제가 중심으로 다룬 것은 오케스트레이터 전체보다, 무역 도메인 RAG와 riskmanaging 흐름이 실제로 작동하도록 만드는 부분이었습니다.</p>
+      </section>
+      <section class="doc-section">
+        <h2>왜 필요했는가</h2>
+        <p>신입사원 온보딩은 문서만 많이 보여준다고 해결되지 않았습니다. 사용자는 용어 이해, 이메일 작성, 리스크 판단처럼 다른 성격의 작업을 연속으로 수행해야 했고, 그 과정에서 앞선 대화 맥락이 계속 이어져야 했습니다.</p>
+      </section>
+      <section class="doc-section">
+        <h2>내 역할</h2>
+        <ul class="plain-list">
+          <li>무역 도메인 데이터 기반 RAG 구조 확인 및 정리</li>
+          <li><code>riskmanaging agent</code> 흐름과 관련 문서, 데이터, 처리 구조 파악</li>
+          <li>프로젝트 저장소 기준으로 백엔드 구조와 API 흐름 정리</li>
+        </ul>
+      </section>
+      <section class="doc-section">
+        <h2>어떻게 작동하는가</h2>
+        <ol class="plain-list">
+          <li>무역 도메인 데이터셋을 정리하고 <code>ingest.py</code>를 통해 ChromaDB에 임베딩 기반 검색 자산을 만듭니다.</li>
+          <li>사용자가 리스크 관련 질문을 보내면 <code>riskmanaging agent</code>가 필요한 정보를 대화형으로 수집합니다.</li>
+          <li>RAG 검색으로 관련 무역 문서를 찾고, 이를 바탕으로 리스크를 평가합니다.</li>
+          <li>최종적으로 리포트 형태의 결과를 반환합니다.</li>
+        </ol>
+      </section>
+      <section class="doc-section">
+        <h2>근거와 산출물</h2>
+        <ul class="plain-list">
+          <li>RAG 자산: <code>dataset/*.json</code>, ingestable 기준 지식 베이스 정리 흔적</li>
+          <li>RiskManaging 관련 문서: <code>docs/riskmanaging_workflow.md</code>, <code>docs/riskmanaging_agent_REPORT.md</code></li>
+          <li>프로젝트 구조 문서: <code>README.md</code>, <code>CLAUDE.md</code></li>
+          <li>백엔드 자산: <code>backend/rag/*</code>, <code>backend/agents/riskmanaging/*</code>, <code>risk_checkpoints.db</code></li>
+        </ul>
+      </section>
+      <section class="doc-section">
+        <h2>결과와 의미</h2>
+        <p>이 프로젝트는 단순 용어 검색이 아니라, 리스크 질문을 대화형으로 수집하고 RAG 근거를 붙여 응답하는 흐름을 다룬 프로젝트입니다. 저는 오케스트레이터 전체를 과장해 설명하기보다, 무역 도메인 RAG와 riskmanaging 흐름이 실제로 어떻게 돌아가는지 중심으로 작업하고 정리했습니다.</p>
+      </section>
+    </main>
+  </body>
 </html>

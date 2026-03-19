@@ -1,10 +1,66 @@
 ﻿<!DOCTYPE html>
 <html lang="ko">
-  <head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>LGEA | 이영기</title><link rel="stylesheet" href="../styles.css" /></head>
-  <body><main class="doc"><nav class="top-nav"><a href="../index.html">Home</a></nav><header class="doc-header"><p class="eyebrow">02. LGEA</p><h1>persona 기반 모델 가드레일 붕괴 테스트</h1></header>
-  <section class="doc-section"><h2>프리뷰</h2><p>실행 중인 <code>LUMI</code> FastAPI와 내부 service surface를 실제로 두드려, 질문 실행 -&gt; 채점 -&gt; 비교 분석 -&gt; 보고서 생성까지 분리한 모델 평가 워크스페이스입니다.</p></section>
-  <section class="doc-section"><h2>무엇을 테스트했는가</h2><ul class="plain-list"><li>실제 <code>LUMI</code> FastAPI <code>/api/v1/chat/</code></li><li>내부 service surface: <code>router</code>, <code>response-layer</code>, <code>rag</code>, <code>tool</code></li><li><code>baseline_questions.json</code> 기반 공통 질문 세트</li><li>abuse category, benign probe, persona source</li></ul></section>
-  <section class="doc-section"><h2>어떻게 구성했는가</h2><p><code>runner -&gt; judge -&gt; analysis -&gt; reports</code> 구조로 질문 실행, 채점, 분석, 보고서를 분리했습니다. 같은 질문 세트를 FastAPI와 service surface에 보내고, 실행 결과를 JSONL로 남긴 뒤, 표면·카테고리·모델 단위로 통계를 만들고 보고서까지 생성합니다.</p></section>
-  <section class="doc-section"><h2>왜 중요한가</h2><p><code>LGEA</code>는 일반적인 서비스 테스트가 아니라, persona에 따라 모델 guardrail이 어떤 표면에서 더 쉽게 무너지는지 반복 가능하게 확인하는 평가 체계입니다. 결과는 JSONL, scored result, 통계 요약, 보고서 형태로 남아 이후 비교와 설명의 근거가 됩니다.</p></section>
-  </main></body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LGEA | 이영기</title>
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body>
+    <main class="doc">
+      <nav class="top-nav"><a href="../index.html">Home</a></nav>
+      <header class="doc-header">
+        <p class="eyebrow">02. LGEA</p>
+        <h1>persona 기반 모델 가드레일 붕괴 테스트</h1>
+        <p class="lede">실행 중인 <code>LUMI</code> FastAPI와 내부 service surface를 실제로 두드려, 질문 실행 → 채점 → 비교 분석 → 보고서 생성까지 분리한 모델 평가 워크스페이스입니다.</p>
+      </header>
+      <section class="doc-section">
+        <h2>핵심 메시지</h2>
+        <p><code>LGEA</code>는 챗봇 기능을 하나 더 붙인 프로젝트가 아니라, persona에 따라 모델의 가드레일이 어느 표면에서 무너지는지 반복 가능하게 확인하는 평가 체계입니다.</p>
+      </section>
+      <section class="doc-section">
+        <h2>왜 따로 필요했는가</h2>
+        <p><code>LUMI</code>를 서비스로 운영하는 것과, 그 서비스가 어떤 질문에서 어떤 표면에서 약해지는지 평가하는 것은 다른 일입니다. 서비스 코드 안에 평가 로직을 섞으면 재현성이 깨지고, 응답을 한 번 확인한 뒤 끝나는 테스트로 남기 쉽습니다.</p>
+        <ul class="plain-list">
+          <li>같은 질문을 다시 돌려도 이전 실험과 비교하기 어렵습니다.</li>
+          <li>FastAPI 최종 응답과 내부 <code>router</code>, <code>response-layer</code>, <code>rag</code>, <code>tool</code> 표면의 차이를 확인하기 어렵습니다.</li>
+          <li>모델 안전성이나 guardrail erosion을 말해도 근거 파일이 남지 않습니다.</li>
+        </ul>
+      </section>
+      <section class="doc-section">
+        <h2>무엇을 테스트했는가</h2>
+        <ul class="plain-list">
+          <li>실제 <code>LUMI</code> FastAPI <code>/api/v1/chat/</code></li>
+          <li>내부 service surface: <code>router</code>, <code>response-layer</code>, <code>rag</code>, <code>tool</code></li>
+          <li><code>baseline_questions.json</code> 기반 공통 질문 세트</li>
+          <li>abuse category, benign probe, persona source와 모델 조합</li>
+        </ul>
+      </section>
+      <section class="doc-section">
+        <h2>어떻게 구현했는가</h2>
+        <ol class="plain-list">
+          <li><code>baseline_questions.json</code>의 질문을 준비합니다.</li>
+          <li>같은 질문 세트를 FastAPI와 service surface에 보냅니다.</li>
+          <li>실행 결과를 <code>results.jsonl</code>, <code>fastapi_live_results.jsonl</code>, <code>service_surface_results.jsonl</code>로 남깁니다.</li>
+          <li>judge 단계에서 최종 응답만 추려 채점합니다.</li>
+          <li>analysis 단계에서 표면, 카테고리, 모델 단위로 통계를 만듭니다.</li>
+          <li>report 단계에서 한국어 보고서와 thesis-ready 문서를 생성합니다.</li>
+        </ol>
+      </section>
+      <section class="doc-section">
+        <h2>무엇을 남겼는가</h2>
+        <ul class="plain-list">
+          <li>실행 결과: <code>LGEA/data/runs/*.jsonl</code></li>
+          <li>채점 결과: <code>LGEA/data/judge/*.jsonl</code></li>
+          <li>분석 요약: <code>LGEA/data/analysis/*.json</code></li>
+          <li>연구 자산: <code>experiment_matrix.json</code>, <code>repetition_plan.json</code>, <code>persona_summary.json</code></li>
+          <li>보고서: <code>thesis_ready_report_ko.md</code>, <code>cross_surface_analysis_ko.md</code>, <code>comparative_stats_ko.md</code></li>
+        </ul>
+      </section>
+      <section class="doc-section">
+        <h2>결과와 의미</h2>
+        <p><code>LUMI</code> 서비스와 평가 레이어를 분리해 설명할 수 있는 구조가 생겼고, 단순 테스트가 아니라 질문 세트, 실행 결과, 채점, 통계, 보고서가 남는 평가 체계를 만들었습니다. 이 프로젝트는 단순 응답 테스트가 아니라 persona에 따른 모델 가드레일 붕괴를 표면별로 비교하고 근거 파일과 보고서로 남기는 평가 체계라는 점이 중요합니다.</p>
+      </section>
+    </main>
+  </body>
 </html>
