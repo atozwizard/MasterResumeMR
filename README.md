@@ -1,4 +1,4 @@
-# 이영기 | AI Agent Engineer · AI Product Engineer · AI Researcher
+# 이영기 | AI Product Engineer
 
 현장의 문제를 흐름과 구조로 풀어, 운영 가능한 AI로 만드는 엔지니어입니다.
 
