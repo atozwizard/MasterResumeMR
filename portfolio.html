@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio | 이영기</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="doc">
+      <nav class="top-nav"><a href="./index.html">Home</a></nav>
+      <header class="doc-header">
+        <p class="eyebrow">Portfolio</p>
+        <h1>이영기 | AI Product Engineer</h1>
+        <p class="lede">현장의 문제를 흐름과 구조로 풀어, 운영 가능한 AI로 만드는 엔지니어입니다.</p>
+        <p class="lead-body">창업과 외식업 운영, 프랜차이즈 현장에서 고객 경험, 병목, 서비스 품질, 인력 운영 문제를 직접 다뤘습니다. AI 전환 이후에도 문제를 보는 방식은 같습니다. 입력이 어떤 상태를 만들고, 그 상태가 어떤 판단과 분기로 이어지며, 마지막에 무엇을 남겨야 다시 비교하고 운영할 수 있는지를 먼저 봅니다.</p>
+      </header>
+      <section class="doc-section">
+        <h2>바로 보기</h2>
+        <ul class="link-list">
+          <li><a href="./resume.html">이력서</a></li>
+          <li><a href="./cover-letter.html">자기소개서</a></li>
+        </ul>
+      </section>
+      <section class="doc-section">
+        <h2>핵심 역량</h2>
+        <ul class="plain-list">
+          <li>상태, 분기, fallback, tracing을 포함한, 운영 가능한 AI 구조 설계</li>
+          <li>사용자 문제와 운영 병목을 제품 흐름으로 번역</li>
+          <li>실험, 채점, 분석을 분리한 평가 구조 설계</li>
+          <li>문서와 리포트까지 포함한 산출물 정리</li>
+        </ul>
+      </section>
+      <section class="doc-section">
+        <h2>대표 프로젝트</h2>
+        <ul class="stack-list">
+          <li><a href="./projects/pommit.html"><strong>1. POMMIT</strong></a><p>기업 분석 프로젝트 안에서 <code>service_agent</code> 흐름을 중심으로 HTML 정리, 텍스트 정제, 단어 빈도 추출, collector 전달 구조를 정리했습니다. 이후에는 NLP 전처리 강화와 HybridRAG 방향을 연구 메모와 설계 문서 수준에서 검토했습니다.</p></li>
+          <li><a href="./projects/lgea.html"><strong>2. LGEA</strong></a><p><code>LUMI</code> 서비스 응답을 실제로 테스트하는 평가 워크스페이스입니다. <code>runner -&gt; judge -&gt; analysis -&gt; reports</code> 구조로 질문 실행, 채점, 비교 분석, 보고서 생성을 분리했고, persona에 따른 모델 가드레일 붕괴를 비교하는 실험 흐름을 다뤘습니다.</p></li>
+          <li><a href="./projects/trade-onboarding-agent.html"><strong>3. trade-onboarding-agent</strong></a><p>무역 실무 온보딩 미니프로젝트에서 <code>RAG</code>와 <code>riskmanaging agent</code> 흐름을 중심으로 작업했습니다. 무역 도메인 데이터 ingest, ChromaDB 기반 검색 구조, riskmanaging agent 문서와 백엔드 흐름을 정리하고, 리스크 질문을 RAG 근거와 함께 응답하는 구조를 다뤘습니다.</p></li>
+          <li><a href="./projects/poketdogam.html"><strong>4. poketdogam</strong></a><p><code>chat</code>, <code>scan</code>, <code>pokedex</code> 흐름을 나눠 멀티모달 사용자 경험을 설계했습니다. 스캔 흐름에는 <code>입력 수집 -&gt; OCR/후보 확인 -&gt; 문맥 검색 -&gt; 응답 생성 -&gt; trace 저장</code> 단계를 두고 fallback을 함께 설계했습니다.</p></li>
+          <li><a href="./projects/lumi.html"><strong>5. LUMI</strong></a><p>청년취업사관학교 교육과정 안에서 구조, 아키텍처, 배포, LLMOps까지 학습하기 위해 진행한 운영형 AI 서비스 본체입니다. 상태, 저장, token/cost tracking, tracing, RAG, fallback 구조를 갖췄고, <code>LGEA</code>는 이 서비스를 검증하는 별도 평가 레이어입니다.</p></li>
+        </ul>
+      </section>
+      <section class="doc-section">
+        <h2>이전 경험</h2>
+        <ul class="plain-list">
+          <li>커피소녀오즈: 생두 매입, 로스팅, QC, 메뉴 기획, 브랜딩, B2B 납품 구조 운영</li>
+          <li>우동오즈: 점심 피크타임 병목과 상권 제약 안에서 공정을 손보고 7분 내 서빙 구조로 개선</li>
+          <li>쿤타치 자가제면: 자가제면 공정과 매장 동선을 함께 보며 운영 효율과 제품 정체성을 조정</li>
+          <li>리틀방콕 중계그린점: 25평 규모 매장에서 HR, 근태, 홀 교육, CS 운영, 주방 교육, 프랜차이즈 구조 경험</li>
+          <li>한솔교육: 3개 지역 150개 수업 운영, 프로모션 매출 달성, 예비팀장 승진 경험</li>
+        </ul>
+      </section>
+      <section class="doc-section">
+        <h2>링크</h2>
+        <ul class="link-list">
+          <li><a href="https://github.com/atozwizard">GitHub</a></li>
+          <li><a href="https://gist.github.com/atozwizard">Gist</a></li>
+          <li><a href="mailto:at.oz.wizard@gmail.com">Email</a></li>
+        </ul>
+      </section>
+    </main>
+  </body>
+</html>
